@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>He_Trogati_Mne — Bio</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230b0c10'/><circle cx='16' cy='16' r='3' fill='%23fff'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=New+Rocker&family=Kells+Uncial&family=UnifrakturCook:wght@700&family=UnifrakturMaguntia&family=Pirata+One&family=Nosifer&family=Creepster&family=Eater&family=Butcherman&family=Frijole&family=Orbitron:wght@400;700&family=Audiowide&family=Michroma&family=Exo+2:wght@400;700&family=Press+Start+2P&family=VT323&family=Silkscreen&family=Bungee+Shade&family=Monoton&family=Rubik+Glitch&family=Rubik+Wet+Paint&family=Rye&family=Special+Elite&family=Roboto&family=Montserrat&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:10px}
+html{scroll-behavior:smooth}
+body{background-color:#0b0c10;background-image:radial-gradient(circle at 50% 30%,rgba(30,35,50,.5) 0%,rgba(11,12,16,1) 70%);background-attachment:fixed;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;overflow-x:hidden;padding:292px 20px 70px;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:#fff}
+#bg-container{position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;overflow:hidden}
+#bg-media{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;transition:filter .3s}
+#bg-media>video,#bg-media>img{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(1.15);min-width:100%;min-height:100%;width:100%;height:100%;object-fit:cover;pointer-events:none;border:0;outline:none}
+#bg-media>iframe.bg-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:0;pointer-events:none;background:#000;outline:none;width:100%;height:100%}
+#bg-media>iframe.bg-frame.bg-frame-video{transform:translate(-50%,-50%) scale(1.35)}
+#bg-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.4)}
+body.file-dragover::after{content:'Відпусти файл, щоб поставити як фон';position:fixed;inset:0;z-index:5000000;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08);border:3px dashed rgba(255,255,255,.6);color:#fff;font-size:22px;font-weight:600;pointer-events:none}
+#ascii-planet{position:fixed;top:6px;left:50%;transform:translateX(-50%);z-index:0;pointer-events:none;user-select:none;-webkit-user-select:none;overflow:hidden}
+#ascii-planet pre{font-family:"SF Mono",Consolas,Menlo,"Courier New",monospace;font-size:10px;line-height:9px;letter-spacing:0;white-space:pre;margin:0;padding:0;font-weight:400;color:#dde4f0;text-shadow:0 0 4px rgba(255,255,255,.95),0 0 12px rgba(200,215,255,.65),0 0 26px rgba(150,180,255,.35);filter:drop-shadow(0 0 45px rgba(180,200,255,.28))}
+#ascii-planet.no-vignette pre{text-shadow:none!important;filter:none!important;color:#fff}
+.top-buttons{position:fixed;top:20px;right:20px;display:flex;gap:10px;z-index:1000}
+.bio-btn,.settings-btn{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;text-decoration:none;color:#fff}
+.bio-btn:hover{background:rgba(255,255,255,.2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 24px rgba(180,200,255,.15)}
+.bio-btn svg{width:20px;height:20px;fill:currentColor}
+.settings-btn:hover{background:rgba(255,255,255,.2);transform:rotate(45deg)}
+.settings-btn svg{width:22px;height:22px;fill:#fff}
+.main-layout{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:640px;z-index:1}
+.top-widget-container{position:relative;z-index:1001;display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:26px;background:rgba(255,255,255,.04);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);padding:6px 16px;border-radius:30px;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.time-display{font-size:20px;font-weight:600;letter-spacing:.5px;color:#fff;font-variant-numeric:tabular-nums}
+.widget-divider{width:1px;height:16px;background-color:rgba(255,255,255,.15)}
+.weather-widget{display:flex;align-items:center;gap:10px;color:#d1d5db;font-size:15px;font-weight:500}
+#weather-icon{display:inline-block;width:18px;text-align:center;line-height:1}
+.weather-link{display:flex;align-items:center;gap:6px;color:#fff;text-decoration:none}
+.custom-select-wrapper{position:relative;user-select:none}
+.custom-select-trigger{display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 8px;border-radius:12px}
+.custom-select-arrow{width:12px;height:12px;fill:none;stroke:rgba(255,255,255,.6);stroke-width:2}
+.custom-options-container{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);width:340px;background:#14161c;border:1px solid rgba(255,255,255,.2);border-radius:14px;display:none;flex-direction:column;padding:10px;z-index:999999;box-shadow:0 20px 50px rgba(0,0,0,.9)}
+.custom-select-wrapper.open .custom-options-container{display:flex}
+.city-search-input{width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:8px 10px;color:#fff;outline:none;margin-bottom:8px;font-family:inherit;font-size:13px}
+.city-filter-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-bottom:8px}
+.city-filter-tab{border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:6px 4px;background:rgba(255,255,255,.05);color:#9aa0a6;cursor:pointer;font-size:11px;font-family:inherit;transition:all .15s}
+.city-filter-tab:hover,.city-filter-tab.active{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.35);color:#fff}
+.city-list-scroll{max-height:320px;overflow-y:auto;display:flex;flex-direction:column}
+.region-header{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);padding:8px 8px 4px;text-transform:uppercase;letter-spacing:.5px}
+.custom-option{padding:8px 12px;font-size:13px;color:#d1d5db;border-radius:6px;cursor:pointer;transition:background .15s,color .15s}
+.custom-option:hover{background:rgba(255,255,255,.15);color:#fff}
+.city-empty-state{padding:18px 10px;color:#80868b;text-align:center;font-size:12px}
+.logo-container{display:flex;justify-content:center;align-items:center;position:relative;margin-bottom:12px;width:100%}
+.logo-text{position:relative;font-size:clamp(26px,5.6vw,54px);font-weight:800;letter-spacing:clamp(1px,.55vw,6px);text-transform:uppercase;text-align:center;user-select:none;--logo-color:#fff;transition:color .3s,text-shadow .3s,filter .3s;-webkit-text-stroke:0}
+.logo-text.effect-gradient{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.35) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 10px 20px rgba(0,0,0,.5))}
+.logo-text.effect-none{-webkit-text-fill-color:var(--logo-color);color:var(--logo-color)}
+.logo-text.effect-glow{-webkit-text-fill-color:var(--logo-color);color:var(--logo-color);text-shadow:0 0 8px var(--logo-color),0 0 20px var(--logo-color),0 0 40px var(--logo-color),0 0 80px var(--logo-color)}
+.logo-text.effect-neon{-webkit-text-fill-color:#fff;color:#fff;text-shadow:0 0 4px #fff,0 0 8px var(--logo-color),0 0 14px var(--logo-color),0 0 28px var(--logo-color),0 0 56px var(--logo-color)}
+.logo-text.effect-metallic{background:linear-gradient(180deg,#f5f5f5,#b8b8b8 25%,#fff 50%,#8a8a8a 75%,#e0e0e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 2px 3px rgba(0,0,0,.7))}
+.logo-text.effect-fire{background:linear-gradient(180deg,#fff5a0,#ff9500 45%,#ff3c00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 0 12px #ff6a00) drop-shadow(0 0 32px #ff2d00)}
+.logo-text.effect-ice{background:linear-gradient(180deg,#fff,#a0d8ff 45%,#4ca8e8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;color:transparent;filter:drop-shadow(0 0 12px #6ec6ff) drop-shadow(0 0 30px #2196f3)}
+.logo-sub{font-size:11px;color:#80868b;letter-spacing:3.4px;text-transform:uppercase;margin-bottom:30px;font-weight:500;font-family:"SF Mono",Consolas,Menlo,"Courier New",monospace;text-align:center}
+.social-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:100%;margin-bottom:20px}
+.social-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 12px rgba(0,0,0,.2);text-decoration:none;color:#e3e3e3;position:relative;overflow:hidden;transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,border-color .25s,box-shadow .25s,color .25s}
+.social-item:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);color:#fff;transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.4)}
+.social-icon{width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:11px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);transition:all .25s}
+.social-item:hover .social-icon{background:rgba(255,255,255,.14);transform:scale(1.06)}
+.social-icon svg{width:17px;height:17px;fill:currentColor}
+.social-label{font-size:13px;font-weight:500;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.social-arrow{margin-left:auto;font-size:13px;color:#fff;opacity:0;transform:translateX(-8px);transition:all .28s;flex-shrink:0}
+.social-item:hover .social-arrow{opacity:.9;transform:translateX(0)}
+.terminal-block{width:100%;padding:14px 18px;border-radius:18px;background:rgba(255,255,255,.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.08);box-shadow:0 4px 12px rgba(0,0,0,.2);display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:"SF Mono",Consolas,Menlo,"Courier New",monospace;font-size:12.5px;color:#9aa0a6}
+.terminal-block .prompt{color:#fff;font-weight:700;text-shadow:0 0 8px rgba(255,255,255,.6)}
+.terminal-block .cmd{color:#d1d5db;letter-spacing:.4px}
+.terminal-block .cursor{display:inline-block;width:2px;height:13px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.9);animation:blink 1s step-end infinite;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.terminal-block .status{margin-left:auto;color:rgba(255,255,255,.3);font-size:11px;letter-spacing:1px}
+.settings-panel{position:fixed;top:0;right:-380px;width:360px;height:100%;background:rgba(20,22,28,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-left:1px solid rgba(255,255,255,.1);box-shadow:-10px 0 30px rgba(0,0,0,.5);z-index:2000000;padding:24px;display:flex;flex-direction:column;gap:18px;overflow-y:auto;transition:right .3s cubic-bezier(.16,1,.3,1)}
+.settings-panel.open{right:0}
+.settings-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:12px}
+.settings-title{font-size:18px;font-weight:600}
+.close-settings{cursor:pointer;font-size:20px;color:#9aa0a6}
+.setting-section-title{font-size:11px;font-weight:700;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:1px;margin-top:10px}
+.setting-group{display:flex;flex-direction:column;gap:8px}
+.setting-label{font-size:13px;color:#9aa0a6;font-weight:500}
+.setting-hint{font-size:11px;color:#6b7280}
+.color-row{display:flex;gap:8px;align-items:center}
+.color-row .setting-input[type=color]{padding:3px;height:42px;width:60px;flex-shrink:0;cursor:pointer}
+.color-row .setting-input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+.color-row .setting-input[type=color]::-webkit-color-swatch{border:none;border-radius:6px}
+.color-row .hex-input{flex:1;font-family:"SF Mono",Consolas,monospace;text-transform:uppercase}
+.setting-input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 14px;color:#fff;outline:none;font-size:14px;font-family:inherit;width:100%;transition:border-color .2s,background .2s}
+.setting-input:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}
+.setting-input:focus{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);box-shadow:0 0 0 3px rgba(255,255,255,.08)}
+.setting-select{display:none}
+.file-upload-btn{display:inline-block;text-align:center;background:rgba(255,255,255,.1);border:1px dashed rgba(255,255,255,.3);padding:10px;border-radius:8px;cursor:pointer;font-size:13px;transition:background .2s}
+.file-upload-btn:hover{background:rgba(255,255,255,.2)}
+.range-slider{width:100%;accent-color:#fff}
+.range-value-row{display:flex;align-items:center;gap:10px}
+.range-value-row .range-slider{flex:1;min-width:0}
+.range-value-row output{min-width:44px;color:#fff;font-size:13px;font-weight:700;text-align:right}
+.size-controls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bg-action-row{display:flex;gap:6px}
+.secondary-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;transition:background .2s}
+.secondary-btn:hover{background:rgba(255,255,255,.18)}
+.bg-clear-btn{background:rgba(255,69,58,.12);border:1px solid rgba(255,69,58,.35);color:#ff6b5e;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:background .2s;white-space:nowrap}
+.bg-clear-btn:hover{background:rgba(255,69,58,.25);color:#ff8a80}
+.reset-btn{background:rgba(255,69,58,.15);border:1px solid rgba(255,69,58,.4);color:#ff453a;padding:10px;border-radius:8px;cursor:pointer;font-weight:600;transition:background .2s;margin-top:10px}
+.reset-btn:hover{background:rgba(255,69,58,.3)}
+.setting-select-custom{position:relative;width:100%;user-select:none}
+.setting-select-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 14px;min-height:42px;color:#fff;font-size:14px;cursor:pointer;transition:border-color .2s,background .2s,box-shadow .2s}
+.setting-select-trigger:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}
+.setting-select-custom.open .setting-select-trigger{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);box-shadow:0 0 0 3px rgba(255,255,255,.08)}
+.setting-select-value{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;line-height:1.3;padding:2px 0}
+.setting-select-arrow{width:14px;height:14px;fill:none;stroke:rgba(255,255,255,.6);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s,stroke .2s;flex-shrink:0}
+.setting-select-custom.open .setting-select-arrow{transform:rotate(180deg);stroke:#fff}
+.setting-select-options{position:absolute;top:calc(100% + 6px);left:0;right:0;max-height:320px;overflow-y:auto;background:#14161c;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:6px;z-index:9999999;box-shadow:0 20px 50px rgba(0,0,0,.9);display:none;flex-direction:column}
+.setting-select-custom.open .setting-select-options{display:flex}
+.setting-select-options::-webkit-scrollbar{width:6px}
+.setting-select-options::-webkit-scrollbar-track{background:transparent}
+.setting-select-options::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:10px}
+.setting-select-option{display:flex;align-items:center;padding:12px 40px 12px 14px;min-height:44px;font-size:14px;line-height:1.35;color:#d1d5db;border-radius:8px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:relative}
+.setting-select-option:hover{background:rgba(255,255,255,.08);color:#fff}
+.setting-select-option.selected{background:rgba(255,255,255,.12);color:#fff;font-weight:600}
+.setting-select-option.selected::after{content:'✓';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;color:#fff}
+.setting-select-option[data-font-preview="1"]{min-height:52px;padding-top:14px;padding-bottom:14px;font-size:18px;line-height:1.4}
+#toast{position:fixed;left:50%;bottom:40px;transform:translateX(-50%) translateY(20px);background:rgba(20,22,28,.95);color:#fff;padding:12px 20px;border-radius:12px;border:1px solid rgba(255,255,255,.15);font-size:14px;font-weight:500;opacity:0;pointer-events:none;transition:all .3s;z-index:4000000;backdrop-filter:blur(12px);box-shadow:0 10px 30px rgba(0,0,0,.5)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#toast.error{border-color:rgba(255,69,58,.5);color:#ff8a80}
+@media (max-width:620px){body{padding:232px 14px 50px}#ascii-planet pre{font-size:8px;line-height:7.5px}.social-grid{grid-template-columns:1fr;gap:8px}.time-display{font-size:17px}.weather-widget{font-size:13px}.logo-sub{letter-spacing:2.6px;margin-bottom:24px}.top-widget-container{padding:6px 14px;gap:10px}.terminal-block{font-size:11.5px;padding:12px 14px}.settings-panel{width:100%;right:-100%}.custom-options-container{width:290px;left:auto;right:-20px;transform:none}}
+@media (max-width:400px){body{padding:202px 12px 40px}#ascii-planet pre{font-size:7px;line-height:6.5px}.logo-text{letter-spacing:1px}.social-label{font-size:12px}}
+</style>
+</head>
+<body>
+<div id="bg-container"><div id="bg-media"></div><div id="bg-overlay"></div></div>
+<div id="ascii-planet" class="no-vignette"><pre id="planet-pre"></pre></div>
+
+<div class="top-buttons">
+<a href="index.html" class="bio-btn" title="На головну / Пошук"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></a>
+<div class="settings-btn" id="open-settings-btn" title="Налаштування"><svg viewBox="0 0 24 24"><path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.73,8.87 c-0.11,0.2-0.06,0.47,0.12,0.61l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/></svg></div>
+</div>
+
+<div class="settings-panel" id="settings-panel">
+<div class="settings-header"><span class="settings-title" id="t-settings-title">Налаштування</span><span class="close-settings" id="close-settings-btn">&times;</span></div>
+
+<div class="setting-section-title" id="t-sec-general">Загальні</div>
+<div class="setting-group"><label class="setting-label" id="t-label-lang">Мова інтерфейсу</label>
+<select id="setting-language" class="setting-select"><option value="uk" id="t-opt-lang-uk">Українська</option><option value="en" id="t-opt-lang-en">English</option></select></div>
+<div class="setting-group"><label class="setting-label" id="t-label-title">Нікнейм (заблоковано)</label><input type="text" id="setting-logo-text" class="setting-input" value="He_Trogati_Mne" readonly style="cursor:not-allowed;opacity:.55"></div>
+<div class="setting-group"><label class="setting-label" id="t-label-logo-color">Колір заголовка (HEX)</label>
+<div class="color-row"><input type="color" id="setting-logo-color" class="setting-input" value="#ffffff"><input type="text" id="setting-logo-color-hex" class="setting-input hex-input" value="#FFFFFF" maxlength="9" autocomplete="off" spellcheck="false"></div></div>
+<div class="setting-group"><label class="setting-label" id="t-label-logo-effect">Ефект заголовка</label>
+<select id="setting-logo-effect" class="setting-select">
+<option value="gradient" id="t-opt-effect-gradient">Градієнт (стандарт)</option>
+<option value="none" id="t-opt-effect-none">Без ефекту</option>
+<option value="glow" id="t-opt-effect-glow">Світіння (Glow)</option>
+<option value="neon" id="t-opt-effect-neon">Неон</option>
+<option value="metallic" id="t-opt-effect-metallic">Метал (Metal)</option>
+<option value="fire" id="t-opt-effect-fire">Вогонь (Fire)</option>
+<option value="ice" id="t-opt-effect-ice">Лід (Ice)</option>
+</select></div>
+<div class="setting-group"><label class="setting-label" id="t-label-font">Шрифт інтерфейсу</label>
+<select id="setting-font-family" class="setting-select">
+<option value="system" id="t-opt-font-system">Системний (Apple / Segoe UI)</option>
+<option value="Roboto">Roboto</option>
+<option value="Montserrat">Montserrat</option>
+<option value="Courier New" id="t-opt-font-monospace">Monospace (Кодерський)</option>
+<option value="Metal Mania">Metal Mania</option>
+<option value="New Rocker">New Rocker</option>
+<option value="Kells Uncial">Kells Uncial</option>
+<option value="UnifrakturCook">UnifrakturCook</option>
+<option value="UnifrakturMaguntia">UnifrakturMaguntia</option>
+<option value="Pirata One">Pirata One</option>
+<option value="Nosifer">Nosifer</option>
+<option value="Creepster">Creepster</option>
+<option value="Eater">Eater</option>
+<option value="Butcherman">Butcherman</option>
+<option value="Frijole">Frijole</option>
+<option value="Orbitron">Orbitron</option>
+<option value="Audiowide">Audiowide</option>
+<option value="Michroma">Michroma</option>
+<option value="Exo 2">Exo 2</option>
+<option value="Press Start 2P">Press Start 2P</option>
+<option value="VT323">VT323</option>
+<option value="Silkscreen">Silkscreen</option>
+<option value="Bungee Shade">Bungee Shade</option>
+<option value="Monoton">Monoton</option>
+<option value="Rubik Glitch">Rubik Glitch</option>
+<option value="Rubik Wet Paint">Rubik Wet Paint</option>
+<option value="Rye">Rye</option>
+<option value="Special Elite">Special Elite</option>
+</select></div>
+
+<div class="setting-section-title" id="t-sec-topwidget">Верхній віджет (час / погода)</div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-scale">Масштаб віджета</label><div class="range-value-row"><input type="range" id="setting-widget-scale" class="range-slider" min="50" max="200" value="100"><output id="widget-scale-value">100%</output></div><span class="setting-hint" id="t-hint-widget-scale">50–200%. Впливає на весь віджет.</span></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-time-size">Розмір шрифту часу (px)</label><div class="range-value-row"><input type="range" id="setting-widget-time-size" class="range-slider" min="10" max="60" value="20"><output id="widget-time-size-value">20</output></div></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-weather-size">Розмір шрифту погоди (px)</label><div class="range-value-row"><input type="range" id="setting-widget-weather-size" class="range-slider" min="8" max="40" value="15"><output id="widget-weather-size-value">15</output></div></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-icon-size">Розмір іконки погоди (px)</label><div class="range-value-row"><input type="range" id="setting-widget-icon-size" class="range-slider" min="10" max="48" value="16"><output id="widget-icon-size-value">16</output></div></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-padding">Внутрішні відступи X / Y (px)</label><div class="size-controls"><input type="range" id="setting-widget-padding-x" class="range-slider" min="0" max="60" value="16"><input type="range" id="setting-widget-padding-y" class="range-slider" min="0" max="40" value="6"></div><span class="setting-hint" id="widget-padding-hint">X: 16 · Y: 6</span></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-gap">Відступ між елементами (px)</label><div class="range-value-row"><input type="range" id="setting-widget-gap" class="range-slider" min="0" max="40" value="12"><output id="widget-gap-value">12</output></div></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-divider">Висота розділювача (px)</label><div class="range-value-row"><input type="range" id="setting-widget-divider" class="range-slider" min="0" max="40" value="16"><output id="widget-divider-value">16</output></div></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-time-show">Показувати час</label><select id="setting-widget-time-show" class="setting-select"><option value="enabled" id="t-opt-widget-show1">Показано</option><option value="disabled" id="t-opt-widget-hide1">Приховано</option></select></div>
+<div class="setting-group"><label class="setting-label" id="t-label-widget-weather-show">Показувати погоду</label><select id="setting-widget-weather-show" class="setting-select"><option value="enabled" id="t-opt-widget-show2">Показано</option><option value="disabled" id="t-opt-widget-hide2">Приховано</option></select></div>
+
+<div class="setting-section-title" id="t-sec-planet">ASCII-об'єкт у шапці</div>
+<div class="setting-group"><label class="setting-label" id="t-label-planet">Що обертається вгорі</label>
+<select id="setting-planet" class="setting-select"><option value="moon" id="t-opt-planet-moon">Місяць</option><option value="saturn" id="t-opt-planet-saturn">Сатурн</option><option value="earth" id="t-opt-planet-earth">Земля</option><option value="sirius" id="t-opt-planet-sirius">Сіріус</option></select></div>
+<div class="setting-group"><label class="setting-label" id="t-label-planet-vignette">Світіння планети</label>
+<select id="setting-planet-vignette" class="setting-select"><option value="disabled" id="t-opt-planet-vignette-disabled">Вимкнено</option><option value="enabled" id="t-opt-planet-vignette-enabled">Увімкнено</option></select></div>
+
+<div class="setting-section-title" id="t-sec-bg">Фон та Візуальні ефекти</div>
+<div class="setting-group"><label class="setting-label" id="t-label-bg-url">Посилання на фон</label>
+<div class="bg-action-row"><input type="text" id="setting-bg-url-input" class="setting-input" style="flex:1" placeholder="https://..."><button id="apply-bg-url-btn" class="secondary-btn">OK</button><button id="clear-bg-url-btn" class="bg-clear-btn">✕</button></div>
+<span class="setting-hint" id="t-hint-bg-url">Enter — застосувати. ✕ — очистити.</span></div>
+<div class="setting-group"><label class="setting-label" id="t-label-bg-file">Або файл з ПК</label><label class="file-upload-btn" id="t-btn-upload">Обрати файл<input type="file" id="setting-bg-file" accept="image/*,video/*" style="display:none"></label><span class="setting-hint" id="t-hint-drag-drop">Підтримка drag & drop по всій сторінці</span></div>
+<div class="setting-group"><label class="setting-label" id="t-label-volume">Гучність відеофону</label><div class="range-value-row"><input type="range" id="setting-bg-volume" class="range-slider" min="0" max="100" value="10"><output id="bg-volume-value">10%</output></div><span class="setting-hint" id="t-hint-volume">0 = без звуку.</span></div>
+<div class="setting-group"><label class="setting-label" id="t-label-blur">Розмиття фону</label><input type="range" id="setting-bg-blur" class="range-slider" min="0" max="30" value="0"></div>
+<div class="setting-group"><label class="setting-label" id="t-label-dim">Затемнення фону</label><input type="range" id="setting-bg-dim" class="range-slider" min="0" max="90" value="40"></div>
+<div class="setting-group"><label class="setting-label" id="t-label-vignette">Градієнтне віньєтування фону</label>
+<select id="setting-bg-gradient" class="setting-select"><option value="enabled" id="t-opt-enabled">Увімкнено</option><option value="disabled" id="t-opt-disabled">Вимкнено</option></select></div>
+<div class="setting-group"><label class="setting-label" id="t-label-bgcolor">Колір фону (HEX)</label>
+<div class="color-row"><input type="color" id="setting-bg-color" class="setting-input" value="#0b0c10"><input type="text" id="setting-bg-color-hex" class="setting-input hex-input" value="#0B0C10" maxlength="9" autocomplete="off" spellcheck="false"></div></div>
+
+<div class="setting-section-title" id="t-sec-glass">Стиль блоків</div>
+<div class="setting-group"><label class="setting-label" id="t-label-opacity">Прозорість блоків</label><input type="range" id="setting-glass-opacity" class="range-slider" min="0" max="50" value="5"></div>
+<div class="setting-group"><label class="setting-label" id="t-label-glassblur">Розмиття блоків</label><input type="range" id="setting-glass-blur" class="range-slider" min="0" max="30" value="12"></div>
+<div class="setting-group"><label class="setting-label" id="t-label-radius">Скруглення кутів</label><input type="range" id="setting-border-radius" class="range-slider" min="0" max="30" value="16"></div>
+
+<div class="setting-section-title" id="t-sec-layout">Розміри</div>
+<div class="setting-group"><label class="setting-label" id="t-label-sizelogo">Розмір заголовка</label><input type="range" id="size-logo" class="range-slider" min="24" max="90" value="54"></div>
+<div class="setting-group"><button id="reset-settings-btn" class="reset-btn">Скинути всі налаштування</button></div>
+</div>
+
+<div class="main-layout">
+<div class="top-widget-container" id="glass-widget">
+<div class="time-display" id="time-display">00:00</div>
+<div class="widget-divider" id="widget-divider"></div>
+<div class="weather-widget" id="weather-widget">
+<a id="weather-google-link" href="https://www.google.com/search?q=погода+Київ" target="_blank" class="weather-link"><span id="weather-icon">☀️</span><span id="weather-temp">--°C</span></a>
+<div class="custom-select-wrapper" id="custom-city-select">
+<div class="custom-select-trigger"><span id="selected-city-name">Київ</span><svg class="custom-select-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+<div class="custom-options-container">
+<input type="text" id="city-search" class="city-search-input" placeholder="Пошук міста..." autocomplete="off">
+<div class="city-filter-tabs"><button type="button" class="city-filter-tab active" data-city-filter="all">Усі міста</button><button type="button" class="city-filter-tab" data-city-filter="ukraine">Україна</button><button type="button" class="city-filter-tab" data-city-filter="foreign">Закордон</button></div>
+<div class="city-list-scroll" id="city-list-scroll"></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="logo-container"><h1 class="logo-text effect-gradient" id="logo-text">He_Trogati_Mne</h1></div>
+<div class="logo-sub" id="logo-sub">digital footprint // leave no trace</div>
+
+<div class="social-grid">
+<a href="https://twitter.com/He_Trogati_Mne" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span><span class="social-label">Twitter / X</span><span class="social-arrow">→</span></a>
+<a href="https://instagram.com/He_Trogati_Mne" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></span><span class="social-label">Instagram</span><span class="social-arrow">→</span></a>
+<a href="https://tiktok.com/@he_trogati_mne" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.01 1.69 4.12 1.13 1.16 2.67 1.83 4.26 1.95v3.91c-1.3-.01-2.59-.4-3.71-1.09-.81-.51-1.5-1.2-2.02-2.01v6.97c.05 3.12-1.63 6.07-4.44 7.42-2.82 1.35-6.19 1.05-8.7-.77-2.6-1.89-3.8-5.11-3.04-8.23C1.22 9.22 3.86 6.84 7 6.43v4.02c-1.65.17-3.04 1.36-3.41 2.99-.44 1.93.57 3.93 2.41 4.67 1.84.75 3.98.05 5.06-1.64.38-.59.58-1.28.57-1.98V0h1.89z"/></svg></span><span class="social-label">TikTok</span><span class="social-arrow">→</span></a>
+<a href="https://youtube.com/@he_trogati_mne" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><span class="social-label">YouTube</span><span class="social-arrow">→</span></a>
+<a href="https://twitch.tv/He_Trogati_Mne" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/></svg></span><span class="social-label">Twitch</span><span class="social-arrow">→</span></a>
+<a href="https://open.spotify.com/user/31b6kcuj5au3c3qdehos2tprxtxu" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></span><span class="social-label">Spotify</span><span class="social-arrow">→</span></a>
+<a href="https://soundcloud.com/He_Trogati_Mne" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M11.56 8.87V17h8.76c2.03 0 3.68-1.65 3.68-3.68 0-1.95-1.52-3.55-3.44-3.67-.38-2.61-2.63-4.62-5.35-4.62-1.39 0-2.67.53-3.65 1.42v2.42zm-1.8 0V17H8.28V8.87h1.48zm-2.96 1.48V17H5.32v-6.65h1.48zm-2.96 1.48V17H2.36v-5.17h1.48zm-2.96 1.48V17H0v-3.7h.88z"/></svg></span><span class="social-label">SoundCloud</span><span class="social-arrow">→</span></a>
+<a href="https://discord.gg/DQHpbet36W" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 01-1.873-.894.077.077 0 01-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 01.077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.073 0 01.078.009c.12.099.246.195.373.289a.077.077 0 01-.006.127 12.298 12.298 0 01-1.873.894.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z"/></svg></span><span class="social-label">Discord</span><span class="social-arrow">→</span></a>
+<a href="https://github.com/He-Trogati-Mne" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span><span class="social-label">GitHub</span><span class="social-arrow">→</span></a>
+<a href="https://reddit.com/user/He_Trogati_Mne/" target="_blank" rel="noopener" class="social-item"><span class="social-icon"><svg viewBox="0 0 24 24"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-.321.844c.54.437.88 1.008.92 1.631.795.122 1.396.804 1.396 1.622 0 .524-.251.988-.638 1.286.04.384.06.774.06 1.163 0 3.208-3.59 5.82-8.008 5.82-4.417 0-8.007-2.611-8.007-5.82 0-.389.02-.779.06-1.163A1.625 1.625 0 0 1 3 11.092c0-.818.6-1.5 1.397-1.622a4.413 4.413 0 0 1 .92-1.631 1.242 1.242 0 0 1-.32-.844c0-.688.561-1.25 1.249-1.25.597 0 1.102.423 1.221 1.003 1.51-.417 3.303-.667 5.234-.694l1.109-3.493 3.016.643a1.25 1.25 0 0 1 2.192 1.042c0 .688-.562 1.25-1.25 1.25a1.25 1.25 0 0 1-1.221-1.003l-2.47-.525-.972 3.076c1.942.024 3.748.277 5.265.698a1.257 1.257 0 0 1 1.221-1.003zm-7.39 5.488c-.687 0-1.248.561-1.248 1.249 0 .688.561 1.249 1.249 1.249.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm4.76 0c-.687 0-1.249.561-1.249 1.249 0 .688.562 1.249 1.249 1.249.688 0 1.25-.561 1.25-1.249 0-.688-.562-1.249-1.25-1.249zm-6.064 3.99c-.082 0-.165.031-.228.094a.317.317 0 0 0 0 .452c.905.905 2.373.957 3.376.957 1.002 0 2.47-.052 3.375-.957a.322.322 0 0 0 0-.452.324.324 0 0 0-.455 0c-.722.723-1.92.775-2.92.775-1.001 0-2.2-.052-2.92-.775a.315.315 0 0 0-.228-.094z"/></svg></span><span class="social-label">Reddit</span><span class="social-arrow">→</span></a>
+</div>
+
+<div class="terminal-block"><span class="prompt">$</span><span class="cmd">./connect --all</span><span class="cursor"></span><span class="status">[running]</span></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let currentLang=localStorage.getItem('cfg_language')||'uk';
+const LOCKED_NICKNAME='He_Trogati_Mne';
+
+/* === CUSTOM SELECT UPGRADE === */
+function upgradeSelect(selectEl){
+  if(selectEl.dataset.customUpgraded)return;
+  selectEl.dataset.customUpgraded='1';
+  selectEl.style.display='none';
+  const wrapper=document.createElement('div');wrapper.className='setting-select-custom';
+  const trigger=document.createElement('div');trigger.className='setting-select-trigger';
+  trigger.innerHTML='<span class="setting-select-value"></span><svg class="setting-select-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
+  wrapper.appendChild(trigger);
+  const optionsBox=document.createElement('div');optionsBox.className='setting-select-options';wrapper.appendChild(optionsBox);
+  selectEl.parentNode.insertBefore(wrapper,selectEl.nextSibling);
+  let isOpen=false;const isFontSelect=selectEl.id==='setting-font-family';
+  function makeOption(opt){
+    const div=document.createElement('div');div.className='setting-select-option';div.dataset.value=opt.value;div.textContent=opt.textContent;
+    if(isFontSelect){div.style.fontFamily=opt.value==='system'?'inherit':'"'+opt.value+'", sans-serif';div.dataset.fontPreview='1'}
+    if(opt.value===selectEl.value)div.classList.add('selected');
+    div.addEventListener('click',e=>{e.stopPropagation();selectEl.value=opt.value;selectEl.dispatchEvent(new Event('change',{bubbles:true}));updateValue();close()});
+    return div;
+  }
+  function rebuildOptions(){optionsBox.innerHTML='';Array.from(selectEl.children).forEach(child=>{if(child.tagName==='OPTGROUP'){const g=document.createElement('div');g.className='setting-select-group';g.textContent=child.label;optionsBox.appendChild(g);Array.from(child.children).forEach(opt=>optionsBox.appendChild(makeOption(opt)))}else if(child.tagName==='OPTION'){optionsBox.appendChild(makeOption(child))}})}
+  function updateValue(){const selected=selectEl.options[selectEl.selectedIndex];const valueEl=trigger.querySelector('.setting-select-value');valueEl.textContent=selected?selected.textContent:'';if(isFontSelect){const v=selectEl.value;valueEl.style.fontFamily=v==='system'?'inherit':'"'+v+'", sans-serif'}optionsBox.querySelectorAll('.setting-select-option').forEach(o=>{o.classList.toggle('selected',o.dataset.value===selectEl.value)})}
+  function open(){document.querySelectorAll('.setting-select-custom.open').forEach(w=>{if(w!==wrapper)w.classList.remove('open')});wrapper.classList.add('open');isOpen=true;requestAnimationFrame(()=>{const rect=trigger.getBoundingClientRect();const optH=optionsBox.offsetHeight;const spaceBelow=window.innerHeight-rect.bottom-12;const spaceAbove=rect.top-12;if(spaceBelow>=optH||spaceBelow>=spaceAbove){optionsBox.style.top='calc(100% + 6px)';optionsBox.style.bottom='auto';optionsBox.style.maxHeight=Math.min(320,spaceBelow)+'px'}else{optionsBox.style.top='auto';optionsBox.style.bottom='calc(100% + 6px)';optionsBox.style.maxHeight=Math.min(320,spaceAbove)+'px'}const sel=optionsBox.querySelector('.setting-select-option.selected');if(sel)sel.scrollIntoView({block:'nearest'})})}
+  function close(){wrapper.classList.remove('open');isOpen=false}
+  trigger.addEventListener('click',e=>{e.stopPropagation();if(isOpen)close();else open()});
+  document.addEventListener('click',e=>{if(isOpen&&!wrapper.contains(e.target))close()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&isOpen)close()});
+  const panel=document.getElementById('settings-panel');if(panel)panel.addEventListener('scroll',()=>{if(isOpen)close()});
+  window.addEventListener('resize',()=>{if(isOpen)close()});
+  rebuildOptions();updateValue();
+  const mo=new MutationObserver(()=>{rebuildOptions();updateValue()});mo.observe(selectEl,{childList:true,subtree:true,characterData:true});
+  selectEl._customUpdate=updateValue;
+  selectEl._customRebuild=()=>{rebuildOptions();updateValue()};
+}
+document.querySelectorAll('.setting-select').forEach(upgradeSelect);
+
+/* === ASCII PLANET === */
+const PLANET_PRE=document.getElementById('planet-pre');
+const W=100,H=28;
+function createMoonRenderer(){
+  const SCALE=22,Y_ASPECT=.5,CHARS=" .:-=+*#%@",CL=CHARS.length;
+  const buf=new Array(W*H),zbuf=new Float32Array(W*H);
+  const maria=[{lat:.42,lon:.55,r:.55,dark:.45},{lat:.2,lon:.95,r:.42,dark:.42},{lat:-.05,lon:1.2,r:.38,dark:.4},{lat:.3,lon:1.75,r:.3,dark:.42},{lat:-.35,lon:-.55,r:.55,dark:.38},{lat:-.1,lon:-.25,r:.35,dark:.3},{lat:.55,lon:-1.1,r:.35,dark:.32}];
+  const craters=[];let seed=987654321;
+  function rng(){seed=(seed*1103515245+12345)&0x7fffffff;return seed/0x7fffffff}
+  for(let i=0;i<70;i++){craters.push({lat:(rng()-.5)*Math.PI*.96,lon:rng()*Math.PI*2,r:.025+rng()*.075})}
+  function sd(a,b,c,d){let dl=b-d;while(dl>Math.PI)dl-=2*Math.PI;while(dl<-Math.PI)dl+=2*Math.PI;const cl=Math.cos(a)*Math.cos(c);return Math.sqrt((a-c)**2+dl*dl*cl*cl)}
+  const NT=60,NP=120,cache=new Float32Array((NT+1)*NP);
+  for(let i=0;i<=NT;i++){const th=i/NT*Math.PI,la=Math.PI/2-th;for(let j=0;j<NP;j++){const lo=j/NP*2*Math.PI;let t=0;
+    for(const m of maria){const d=sd(la,lo,m.lat,m.lon);if(d<m.r){const k=1-d/m.r;t-=k*k*m.dark}}
+    for(const c of craters){const d=sd(la,lo,c.lat,c.lon);if(d<c.r){const k=d/c.r;if(k<.7)t-=.22*(1-k/.7);else t+=.14*(1-Math.abs(k-.85)/.15)}}
+    cache[i*NP+j]=t}}
+  let A=.22,B=0;const ll=Math.sqrt(.45*.45+.42*.42+.79*.79),lx=-.45/ll,ly=.42/ll,lz=.79/ll;
+  return{render:function(){
+    for(let i=0;i<W*H;i++){buf[i]=' ';zbuf[i]=-Infinity}
+    const cA=Math.cos(A),sA=Math.sin(A),cB=Math.cos(B),sB=Math.sin(B);
+    for(let i=0;i<=NT;i++){const th=i/NT*Math.PI,st=Math.sin(th),ct=Math.cos(th);
+      for(let j=0;j<NP;j++){const ph=j/NP*2*Math.PI,sp=Math.sin(ph),cp=Math.cos(ph);
+        const x=st*cp,y=ct,z=st*sp;
+        const y1=y*cA-z*sA,z1=y*sA+z*cA,x1=x;
+        const x2=x1*cB+z1*sB,y2=y1,z2=-x1*sB+z1*cB;
+        let lum=x2*lx+y2*ly+z2*lz;lum=lum*.7+.28;lum+=cache[i*NP+j];lum+=Math.pow(1-Math.abs(z2),6)*.18;
+        if(lum<0)lum=0;if(lum>1)lum=1;
+        const px=Math.round(W/2+SCALE*x2),py=Math.round(H/2-SCALE*y2*Y_ASPECT);
+        if(px<0||px>=W||py<0||py>=H)continue;
+        const idx=px+py*W;
+        if(z2>zbuf[idx]){zbuf[idx]=z2;let ci=Math.floor(lum*(CL-1));if(ci<0)ci=0;if(ci>=CL)ci=CL-1;buf[idx]=CHARS[ci]}}}
+    const lines=new Array(H);for(let y=0;y<H;y++)lines[y]=buf.slice(y*W,(y+1)*W).join('');
+    PLANET_PRE.textContent=lines.join('\n');B+=.014
+  }}
+}
+function createSaturnRenderer(){
+  const SCALE=17,Y_ASPECT=.55,CHARS=" .:-=+*#%@",CL=CHARS.length;
+  const buf=new Array(W*H),zbuf=new Float32Array(W*H);
+  const PR=1,RI=1.35,RO=2.15,A=.48;let B=0;
+  const ll=Math.sqrt(.45*.45+.55*.55+.7*.7),lx=-.45/ll,ly=.55/ll,lz=.7/ll;
+  return{render:function(){
+    for(let i=0;i<W*H;i++){buf[i]=' ';zbuf[i]=-Infinity}
+    const cA=Math.cos(A),sA=Math.sin(A),cB=Math.cos(B),sB=Math.sin(B);
+    const NT=40,NP=80;
+    for(let i=0;i<=NT;i++){const th=i/NT*Math.PI,st=Math.sin(th),ct=Math.cos(th);
+      for(let j=0;j<NP;j++){const ph=j/NP*2*Math.PI,sp=Math.sin(ph),cp=Math.cos(ph);
+        const x=st*cp,y=ct,z=st*sp;
+        const y1=y*cA-z*sA,z1=y*sA+z*cA,x1=x;
+        const x2=x1*cB+z1*sB,y2=y1,z2=-x1*sB+z1*cB;
+        let lum=x2*lx+y2*ly+z2*lz;const band=Math.sin(y*22)*.1+Math.sin(y*9)*.08+Math.sin(y*4)*.05;lum=lum*.65+.3+band;lum+=Math.pow(1-Math.abs(z2),8)*.25;
+        if(lum<0)lum=0;if(lum>1)lum=1;
+        const px=Math.round(W/2+SCALE*x2),py=Math.round(H/2-SCALE*y2*Y_ASPECT);
+        if(px<0||px>=W||py<0||py>=H)continue;
+        const idx=px+py*W;if(z2>zbuf[idx]){zbuf[idx]=z2;let ci=Math.floor(lum*(CL-1));if(ci<0)ci=0;if(ci>=CL)ci=CL-1;buf[idx]=CHARS[ci]}}}
+    const rnx=sA*sB,rny=cA,rnz=sA*cB,RS=26,AS=220;
+    for(let ri=0;ri<=RS;ri++){const t=ri/RS,r=RI+(RO-RI)*t;let rb=.55+Math.sin(r*14)*.18+Math.sin(r*31)*.12;
+      if(r>1.95&&r<2.05)rb*=.1;if(r>1.72&&r<1.78)rb*=.35;if(r>1.52&&r<1.56)rb*=.5;if(rb<0)rb=0;if(rb>1)rb=1;
+      for(let ai=0;ai<AS;ai++){const a=ai/AS*2*Math.PI,ca=Math.cos(a),sa=Math.sin(a);
+        const x=r*ca,y=0,z=r*sa;const y1=y*cA-z*sA,z1=y*sA+z*cA,x1=x;const x2=x1*cB+z1*sB,y2=y1,z2=-x1*sB+z1*cB;
+        let lum=Math.abs(rnx*lx+rny*ly+rnz*lz);lum=lum*.5+.4;const pd=x2*lx+y2*ly+z2*lz;
+        if(pd<0){const ps=x2*x2+y2*y2+z2*z2,dp=ps-pd*pd;if(dp<PR*PR)lum*=.15}
+        lum*=rb;if(lum<0)lum=0;if(lum>1)lum=1;
+        const px=Math.round(W/2+SCALE*x2),py=Math.round(H/2-SCALE*y2*Y_ASPECT);
+        if(px<0||px>=W||py<0||py>=H)continue;
+        const idx=px+py*W;if(z2>zbuf[idx]){zbuf[idx]=z2;let ci=Math.floor(lum*(CL-1));if(ci<0)ci=0;if(ci>=CL)ci=CL-1;buf[idx]=CHARS[ci]}}}
+    const lines=new Array(H);for(let y=0;y<H;y++)lines[y]=buf.slice(y*W,(y+1)*W).join('');
+    PLANET_PRE.textContent=lines.join('\n');B+=.016
+  }}
+}
+function createEarthRenderer(){
+  const SCALE=22,Y_ASPECT=.5,CHARS=" .:-=+*#%@",CL=CHARS.length;
+  const buf=new Array(W*H),zbuf=new Float32Array(W*H);
+  function noise(lo,la){const a=Math.sin(lo*1.3+la*2.1)*Math.cos(la*1.7-lo*.9),b=Math.sin(lo*2.7-la*1.4)*.5,c=Math.cos(lo*4.1+la*3.3)*.25;return(a+b+c)/1.75}
+  const NT=60,NP=120,cache=new Float32Array((NT+1)*NP);
+  for(let i=0;i<=NT;i++){const th=i/NT*Math.PI,la=Math.PI/2-th;for(let j=0;j<NP;j++){const lo=j/NP*2*Math.PI,n=noise(lo,la);
+    const ice=Math.max(0,(Math.abs(la)-1.15)*3);let v;if(n>.05)v=.15+(n-.05)*.5;else v=-.15+n*.35;v+=ice*.6;
+    const cl=Math.sin(lo*5.3+la*4.1)*Math.cos(lo*3.7-la*2.9);if(cl>.55)v+=.18;cache[i*NP+j]=v}}
+  let A=.35,B=0;const ll=Math.sqrt(.45*.45+.5*.5+.75*.75),lx=-.45/ll,ly=.5/ll,lz=.75/ll;
+  return{render:function(){
+    for(let i=0;i<W*H;i++){buf[i]=' ';zbuf[i]=-Infinity}
+    const cA=Math.cos(A),sA=Math.sin(A),cB=Math.cos(B),sB=Math.sin(B);
+    for(let i=0;i<=NT;i++){const th=i/NT*Math.PI,st=Math.sin(th),ct=Math.cos(th);
+      for(let j=0;j<NP;j++){const ph=j/NP*2*Math.PI,sp=Math.sin(ph),cp=Math.cos(ph);
+        const x=st*cp,y=ct,z=st*sp;const y1=y*cA-z*sA,z1=y*sA+z*cA,x1=x;const x2=x1*cB+z1*sB,y2=y1,z2=-x1*sB+z1*cB;
+        let lum=x2*lx+y2*ly+z2*lz;lum=lum*.62+.42;lum+=cache[i*NP+j];lum+=Math.pow(1-Math.abs(z2),6)*.2;
+        if(lum<0)lum=0;if(lum>1)lum=1;
+        const px=Math.round(W/2+SCALE*x2),py=Math.round(H/2-SCALE*y2*Y_ASPECT);
+        if(px<0||px>=W||py<0||py>=H)continue;
+        const idx=px+py*W;if(z2>zbuf[idx]){zbuf[idx]=z2;let ci=Math.floor(lum*(CL-1));if(ci<0)ci=0;if(ci>=CL)ci=CL-1;buf[idx]=CHARS[ci]}}}
+    const lines=new Array(H);for(let y=0;y<H;y++)lines[y]=buf.slice(y*W,(y+1)*W).join('');
+    PLANET_PRE.textContent=lines.join('\n');B+=.014
+  }}
+}
+function createSiriusRenderer(){
+  const CHARS=" .`'\":;~=+*#%@",CL=CHARS.length;
+  const buf=new Array(W*H),CX=W/2,CY=H/2,CR=4;let phase=0;
+  return{render:function(){
+    phase+=.09;const p=.82+Math.sin(phase*1.3)*.18,p2=.85+Math.sin(phase*2.7+1.5)*.15;
+    for(let i=0;i<W*H;i++)buf[i]=' ';
+    for(let y=0;y<H;y++){for(let x=0;x<W;x++){
+      const dx=x-CX,dy=(y-CY)*2.15;const d=Math.sqrt(dx*dx+dy*dy);let lum=0;
+      if(d<CR)lum=1;else{const g=Math.max(0,1-(d-CR)/14);lum=g*g*.55;
+        const rh=Math.max(0,1-Math.abs(dy)/1.6)*Math.max(0,1-Math.abs(dx)/42);
+        const rv=Math.max(0,1-Math.abs(dx)/1.6)*Math.max(0,1-Math.abs(dy)/14);
+        lum=Math.max(lum,rh*.85*p,rv*.85*p);
+        const dxd=Math.abs(dx+dy)/Math.SQRT2,dyd=Math.abs(dx-dy)/Math.SQRT2;
+        const rd1=Math.max(0,1-dxd/1.4)*Math.max(0,1-d/22),rd2=Math.max(0,1-dyd/1.4)*Math.max(0,1-d/22);
+        lum=Math.max(lum,rd1*.7*p2,rd2*.7*p2)}
+      lum*=p;if(lum<.04)continue;if(lum>1)lum=1;
+      let ci=Math.floor(lum*(CL-1));if(ci<0)ci=0;if(ci>=CL)ci=CL-1;buf[x+y*W]=CHARS[ci]}}
+    const lines=new Array(H);for(let y=0;y<H;y++)lines[y]=buf.slice(y*W,(y+1)*W).join('');
+    PLANET_PRE.textContent=lines.join('\n')
+  }}
+}
+const PLANET_RENDERERS={moon:createMoonRenderer(),saturn:createSaturnRenderer(),earth:createEarthRenderer(),sirius:createSiriusRenderer()};
+let activeRenderer=PLANET_RENDERERS.moon,planetRAF=null,planetFrame=0;
+function startPlanetLoop(){if(planetRAF)cancelAnimationFrame(planetRAF);function loop(){planetFrame=(planetFrame+1)%2;if(planetFrame===0&&activeRenderer)activeRenderer.render();planetRAF=requestAnimationFrame(loop)}planetRAF=requestAnimationFrame(loop)}
+function setPlanet(type){activeRenderer=PLANET_RENDERERS[type]||PLANET_RENDERERS.moon;if(activeRenderer)activeRenderer.render()}
+
+/* === DOM REFS === */
+const openSettingsBtn=document.getElementById('open-settings-btn');
+const closeSettingsBtn=document.getElementById('close-settings-btn');
+const settingsPanel=document.getElementById('settings-panel');
+const settingLanguage=document.getElementById('setting-language');
+const settingLogoText=document.getElementById('setting-logo-text');
+const settingLogoColor=document.getElementById('setting-logo-color');
+const settingLogoColorHex=document.getElementById('setting-logo-color-hex');
+const settingLogoEffect=document.getElementById('setting-logo-effect');
+const settingFontFamily=document.getElementById('setting-font-family');
+const settingPlanet=document.getElementById('setting-planet');
+const settingPlanetVignette=document.getElementById('setting-planet-vignette');
+const settingBgUrlInput=document.getElementById('setting-bg-url-input');
+const applyBgUrlBtn=document.getElementById('apply-bg-url-btn');
+const clearBgUrlBtn=document.getElementById('clear-bg-url-btn');
+const settingBgFile=document.getElementById('setting-bg-file');
+const settingBgVolume=document.getElementById('setting-bg-volume');
+const bgVolumeValue=document.getElementById('bg-volume-value');
+const settingBgBlur=document.getElementById('setting-bg-blur');
+const settingBgDim=document.getElementById('setting-bg-dim');
+const settingBgGradient=document.getElementById('setting-bg-gradient');
+const settingBgColor=document.getElementById('setting-bg-color');
+const settingBgColorHex=document.getElementById('setting-bg-color-hex');
+const settingGlassOpacity=document.getElementById('setting-glass-opacity');
+const settingGlassBlur=document.getElementById('setting-glass-blur');
+const settingBorderRadius=document.getElementById('setting-border-radius');
+const sizeLogo=document.getElementById('size-logo');
+const resetSettingsBtn=document.getElementById('reset-settings-btn');
+const settingWidgetScale=document.getElementById('setting-widget-scale');
+const settingWidgetTimeSize=document.getElementById('setting-widget-time-size');
+const settingWidgetWeatherSize=document.getElementById('setting-widget-weather-size');
+const settingWidgetIconSize=document.getElementById('setting-widget-icon-size');
+const settingWidgetPaddingX=document.getElementById('setting-widget-padding-x');
+const settingWidgetPaddingY=document.getElementById('setting-widget-padding-y');
+const settingWidgetGap=document.getElementById('setting-widget-gap');
+const settingWidgetDivider=document.getElementById('setting-widget-divider');
+const settingWidgetTimeShow=document.getElementById('setting-widget-time-show');
+const settingWidgetWeatherShow=document.getElementById('setting-widget-weather-show');
+const widgetScaleValue=document.getElementById('widget-scale-value');
+const widgetTimeSizeValue=document.getElementById('widget-time-size-value');
+const widgetWeatherSizeValue=document.getElementById('widget-weather-size-value');
+const widgetIconSizeValue=document.getElementById('widget-icon-size-value');
+const widgetGapValue=document.getElementById('widget-gap-value');
+const widgetDividerValue=document.getElementById('widget-divider-value');
+const widgetPaddingHint=document.getElementById('widget-padding-hint');
+const logoTextEl=document.getElementById('logo-text');
+const glassWidget=document.getElementById('glass-widget');
+const glassWidgetDivider=document.getElementById('widget-divider');
+const weatherWidgetEl=document.getElementById('weather-widget');
+const asciiPlanetEl=document.getElementById('ascii-planet');
+const bgMedia=document.getElementById('bg-media');
+const bgOverlay=document.getElementById('bg-overlay');
+const toastEl=document.getElementById('toast');
+
+/* === UTILITIES === */
+let toastTimer=null;
+function showToast(msg,isError=false){toastEl.textContent=msg;toastEl.classList.toggle('error',isError);toastEl.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove('show'),3000)}
+function applyPlanetVignette(val){if(val==='disabled')asciiPlanetEl.classList.add('no-vignette');else asciiPlanetEl.classList.remove('no-vignette')}
+function normalizeHexColor(str){if(!str)return null;let s=String(str).trim();if(!s)return null;if(s[0]!=='#')s='#'+s;if(/^#[0-9a-f]{3}$/i.test(s)){s='#'+s[1]+s[1]+s[2]+s[2]+s[3]+s[3]}if(/^#[0-9a-f]{6}$/i.test(s))return s;if(/^#[0-9a-f]{8}$/i.test(s))return s;return null}
+const ALL_EFFECT_CLASSES=['effect-gradient','effect-none','effect-glow','effect-neon','effect-metallic','effect-fire','effect-ice'];
+function applyLogoEffect(){const effect=settingLogoEffect.value||'gradient';const color=settingLogoColor.value||'#ffffff';ALL_EFFECT_CLASSES.forEach(c=>logoTextEl.classList.remove(c));logoTextEl.classList.add('effect-'+effect);logoTextEl.style.setProperty('--logo-color',color)}
+function applyWidgetStyle(){if(!glassWidget)return;
+  const scale=Math.max(.5,Math.min(2,(parseInt(settingWidgetScale.value,10)||100)/100));
+  const timeSize=parseInt(settingWidgetTimeSize.value,10)||20;
+  const weatherSz=parseInt(settingWidgetWeatherSize.value,10)||15;
+  const iconSize=parseInt(settingWidgetIconSize.value,10)||16;
+  const padX=parseInt(settingWidgetPaddingX.value,10),padY=parseInt(settingWidgetPaddingY.value,10);
+  const gap=parseInt(settingWidgetGap.value,10)||0,divH=parseInt(settingWidgetDivider.value,10)||0;
+  const showTime=settingWidgetTimeShow.value==='enabled',showWeather=settingWidgetWeatherShow.value==='enabled';
+  glassWidget.style.padding=(isNaN(padY)?6:padY)+'px '+(isNaN(padX)?16:padX)+'px';glassWidget.style.gap=gap+'px';
+  if(Math.abs(scale-1)<.001){glassWidget.style.transform='';glassWidget.style.transformOrigin=''}else{glassWidget.style.transform='scale('+scale+')';glassWidget.style.transformOrigin='center center'}
+  const timeEl=document.getElementById('time-display');if(timeEl){timeEl.style.fontSize=timeSize+'px';timeEl.style.display=showTime?'':'none'}
+  if(weatherWidgetEl){weatherWidgetEl.style.fontSize=weatherSz+'px';weatherWidgetEl.style.display=showWeather?'':'none'}
+  const iconEl=document.getElementById('weather-icon');if(iconEl){iconEl.style.fontSize=iconSize+'px';iconEl.style.lineHeight='1'}
+  if(glassWidgetDivider){glassWidgetDivider.style.height=divH+'px';glassWidgetDivider.style.display=(showTime&&showWeather)?'':'none'}
+  widgetScaleValue.textContent=Math.round(scale*100)+'%';widgetTimeSizeValue.textContent=timeSize;widgetWeatherSizeValue.textContent=weatherSz;widgetIconSizeValue.textContent=iconSize;widgetGapValue.textContent=gap;widgetDividerValue.textContent=divH;widgetPaddingHint.textContent='X: '+(isNaN(padX)?16:padX)+' · Y: '+(isNaN(padY)?6:padY)}
+function saveWidgetSettings(){localStorage.setItem('cfg_widget_scale',settingWidgetScale.value);localStorage.setItem('cfg_widget_time_size',settingWidgetTimeSize.value);localStorage.setItem('cfg_widget_weather_size',settingWidgetWeatherSize.value);localStorage.setItem('cfg_widget_icon_size',settingWidgetIconSize.value);localStorage.setItem('cfg_widget_pad_x',settingWidgetPaddingX.value);localStorage.setItem('cfg_widget_pad_y',settingWidgetPaddingY.value);localStorage.setItem('cfg_widget_gap',settingWidgetGap.value);localStorage.setItem('cfg_widget_divider',settingWidgetDivider.value);localStorage.setItem('cfg_widget_time_show',settingWidgetTimeShow.value);localStorage.setItem('cfg_widget_weather_show',settingWidgetWeatherShow.value)}
+
+/* === CITIES === */
+const citiesData={
+"Київ (столиця)":{"Київ":{lat:50.4501,lon:30.5234}},"Севастополь":{"Севастополь":{lat:44.6166,lon:33.5254}},
+"Вінницька область":{"Вінниця":{lat:49.2331,lon:28.4682},"Жмеринка":{lat:49.0371,lon:28.1064},"Козятин":{lat:49.7167,lon:28.8333},"Могилів-Подільський":{lat:48.4552,lon:27.7972},"Хмільник":{lat:49.5569,lon:27.9572},"Калинівка":{lat:49.45,lon:28.53}},
+"Волинська область":{"Луцьк":{lat:50.7472,lon:25.3254},"Ковель":{lat:51.2173,lon:24.7099},"Володимир":{lat:50.8744,lon:24.3222},"Нововолинськ":{lat:50.7272,lon:24.1611}},
+"Дніпропетровська область":{"Дніпро":{lat:48.4647,lon:35.0462},"Кривий Ріг":{lat:47.9105,lon:33.3918},"Нікополь":{lat:47.5695,lon:34.3941},"Павлоград":{lat:48.5244,lon:35.8751},"Кам'янське":{lat:48.5113,lon:34.6021},"Новомосковськ":{lat:48.6333,lon:35.2167}},
+"Донецька область":{"Донецьк":{lat:48.0159,lon:37.8028},"Маріуполь":{lat:47.0971,lon:37.5434},"Краматорськ":{lat:48.739,lon:37.5838},"Слов'янськ":{lat:48.8534,lon:37.6252},"Бахмут":{lat:48.5987,lon:38},"Макіївка":{lat:48.0556,lon:37.9611}},
+"Житомирська область":{"Житомир":{lat:50.2547,lon:28.6587},"Бердичів":{lat:49.8923,lon:28.5997},"Коростень":{lat:50.9501,lon:28.6386},"Звягель":{lat:50.5843,lon:27.6258}},
+"Закарпатська область":{"Ужгород":{lat:48.6208,lon:22.2879},"Мукачево":{lat:48.4416,lon:22.7169},"Хуст":{lat:48.1756,lon:23.2989}},
+"Запорізька область":{"Запоріжжя":{lat:47.8388,lon:35.1396},"Мелітополь":{lat:46.8489,lon:35.3653},"Бердянськ":{lat:46.7558,lon:36.7889},"Енергодар":{lat:47.4988,lon:34.6565}},
+"Івано-Франківська область":{"Івано-Франківськ":{lat:48.9226,lon:24.7111},"Калуш":{lat:49.0439,lon:24.3614},"Коломия":{lat:48.531,lon:25.0396}},
+"Київська область":{"Біла Церква":{lat:49.7969,lon:30.1169},"Бориспіль":{lat:50.3542,lon:30.9572},"Бровари":{lat:50.5114,lon:30.7903},"Буча":{lat:50.5488,lon:30.2208},"Ірпінь":{lat:50.5186,lon:30.2397},"Обухів":{lat:50.1,lon:30.6333},"Фастів":{lat:50.0783,lon:29.9175}},
+"Кіровоградська область":{"Кропивницький":{lat:48.5079,lon:32.2623},"Олександрія":{lat:48.6711,lon:33.1075},"Знам'янка":{lat:48.7167,lon:32.6667}},
+"Луганська область":{"Луганськ":{lat:48.574,lon:39.3078},"Сєвєродонецьк":{lat:48.9481,lon:38.4917},"Лисичанськ":{lat:48.8889,lon:38.4417}},
+"Львівська область":{"Львів":{lat:49.8383,lon:24.0232},"Дрогобич":{lat:49.3514,lon:23.5058},"Стрий":{lat:49.2558,lon:23.85},"Самбір":{lat:49.5183,lon:23.1975},"Трускавець":{lat:49.2833,lon:23.5},"Червоноград":{lat:50.3867,lon:24.2286}},
+"Миколаївська область":{"Миколаїв":{lat:46.975,lon:31.9946},"Вознесенськ":{lat:47.5667,lon:31.3333},"Очаків":{lat:46.6167,lon:31.5333},"Первомайськ":{lat:48.0439,lon:30.85}},
+"Одеська область":{"Одеса":{lat:46.4825,lon:30.7233},"Ізмаїл":{lat:45.3528,lon:28.8319},"Білгород-Дністровський":{lat:46.1931,lon:30.3522},"Чорноморськ":{lat:46.3017,lon:30.6569},"Подільськ":{lat:47.7419,lon:29.535}},
+"Полтавська область":{"Полтава":{lat:49.5883,lon:34.5514},"Кременчук":{lat:49.0631,lon:33.4039},"Лубни":{lat:50.0128,lon:32.9928},"Миргород":{lat:49.9664,lon:33.6072},"Горішні Плавні":{lat:49.0106,lon:33.6356}},
+"Рівненська область":{"Рівне":{lat:50.6199,lon:26.2516},"Дубно":{lat:50.4186,lon:25.7358},"Костопіль":{lat:50.8833,lon:26.45}},
+"Сумська область":{"Суми":{lat:50.9077,lon:34.7981},"Конотоп":{lat:51.2403,lon:33.2028},"Шостка":{lat:51.8631,lon:33.4697},"Охтирка":{lat:50.3119,lon:34.8989}},
+"Тернопільська область":{"Тернопіль":{lat:49.5535,lon:25.5948},"Чортків":{lat:49.0169,lon:25.7978},"Кременець":{lat:50.1008,lon:25.7289}},
+"Харківська область":{"Харків":{lat:49.9935,lon:36.2304},"Ізюм":{lat:49.2081,lon:37.2758},"Куп'янськ":{lat:49.7153,lon:37.6086},"Лозова":{lat:48.8903,lon:36.315},"Чугуїв":{lat:49.8356,lon:36.6842}},
+"Херсонська область":{"Херсон":{lat:46.6354,lon:32.6169},"Каховка":{lat:46.8122,lon:33.4739},"Нова Каховка":{lat:46.7522,lon:33.3619},"Генічеськ":{lat:46.1667,lon:34.8}},
+"Хмельницька область":{"Хмельницький":{lat:49.423,lon:26.9871},"Кам'янець-Подільський":{lat:48.6789,lon:26.5819},"Нетішин":{lat:50.3458,lon:26.6508},"Шепетівка":{lat:50.1856,lon:27.0622}},
+"Черкаська область":{"Черкаси":{lat:49.4444,lon:32.0598},"Умань":{lat:48.7483,lon:30.2219},"Сміла":{lat:49.2289,lon:31.8711},"Канів":{lat:49.75,lon:31.4667}},
+"Чернівецька область":{"Чернівці":{lat:48.2921,lon:25.9358},"Хотин":{lat:48.5,lon:26.5},"Сторожинець":{lat:48.1667,lon:25.7167}},
+"Чернігівська область":{"Чернігів":{lat:51.4982,lon:31.2893},"Ніжин":{lat:51.0381,lon:31.8861},"Прилуки":{lat:50.5919,lon:32.3867}},
+"Автономна Республіка Крим":{"Сімферополь":{lat:44.9521,lon:34.1024},"Ялта":{lat:44.4952,lon:34.1663},"Севастополь":{lat:44.6166,lon:33.5254},"Євпаторія":{lat:45.1904,lon:33.3668},"Керч":{lat:45.3562,lon:36.4674},"Феодосія":{lat:45.0312,lon:35.3792}},
+"Польща":{"Варшава":{lat:52.2297,lon:21.0122},"Краків":{lat:50.0647,lon:19.945},"Жешув":{lat:50.0413,lon:21.999},"Гданськ":{lat:54.352,lon:18.6466},"Вроцлав":{lat:51.1079,lon:17.0385},"Познань":{lat:52.4064,lon:16.9252}},
+"Німеччина":{"Берлін":{lat:52.52,lon:13.405},"Мюнхен":{lat:48.1351,lon:11.582},"Гамбург":{lat:53.5511,lon:9.9937},"Франкфурт-на-Майні":{lat:50.1109,lon:8.6821},"Кельн":{lat:50.9375,lon:6.9603}},
+"Сполучене Королівство":{"Лондон":{lat:51.5074,lon:-.1278},"Едінбург":{lat:55.9533,lon:-3.1883},"Манчестер":{lat:53.4808,lon:-2.2426},"Ліверпуль":{lat:53.4084,lon:-2.9916}},
+"Франція":{"Париж":{lat:48.8566,lon:2.3522},"Ліон":{lat:45.764,lon:4.8357},"Марсель":{lat:43.2965,lon:5.3698},"Ніцца":{lat:43.7102,lon:7.262}},
+"Італія":{"Рим":{lat:41.9028,lon:12.4964},"Мілан":{lat:45.4642,lon:9.19},"Венеція":{lat:45.4408,lon:12.3155},"Флоренція":{lat:43.7696,lon:11.2558}},
+"Іспанія":{"Мадрид":{lat:40.4168,lon:-3.7038},"Барселона":{lat:41.3851,lon:2.1734},"Валенсія":{lat:39.4699,lon:-.3763}},
+"США":{"Нью-Йорк":{lat:40.7128,lon:-74.006},"Лос-Анджелес":{lat:34.0522,lon:-118.2437},"Чикаго":{lat:41.8781,lon:-87.6298},"Маямі":{lat:25.7617,lon:-80.1918},"Лас-Вегас":{lat:36.1699,lon:-115.1398},"Сіетл":{lat:47.6062,lon:-122.3321},"Сан-Франциско":{lat:37.7749,lon:-122.4194},"Бостон":{lat:42.3601,lon:-71.0589}},
+"Канада":{"Торонто":{lat:43.6532,lon:-79.3832},"Ванкувер":{lat:49.2827,lon:-123.1207},"Монреаль":{lat:45.5017,lon:-73.5673},"Оттава":{lat:45.4215,lon:-75.6972}},
+"Японія":{"Токіо":{lat:35.6762,lon:139.6503},"Осака":{lat:34.6937,lon:135.5023},"Кіото":{lat:35.0116,lon:135.7681},"Саппоро":{lat:43.0618,lon:141.3545}},
+"Австралія":{"Сідней":{lat:-33.8688,lon:151.2093},"Мельбурн":{lat:-37.8136,lon:144.9631},"Канберра":{lat:-35.2809,lon:149.13}}
+};
+const customSelectWrapper=document.getElementById('custom-city-select');
+const selectedCityName=document.getElementById('selected-city-name');
+const cityListScroll=document.getElementById('city-list-scroll');
+const citySearchInput=document.getElementById('city-search');
+const weatherTemp=document.getElementById('weather-temp');
+const weatherIcon=document.getElementById('weather-icon');
+const weatherGoogleLink=document.getElementById('weather-google-link');
+const cityFilterTabs=document.querySelectorAll('[data-city-filter]');
+let activeCityFilter='all';
+const cityEnglishNames={"Київ":"Kyiv","Львів":"Lviv","Харків":"Kharkiv","Одеса":"Odesa","Дніпро":"Dnipro","Донецьк":"Donetsk","Луганськ":"Luhansk","Маріуполь":"Mariupol","Запоріжжя":"Zaporizhzhia","Чернівці":"Chernivtsi","Чернігів":"Chernihiv","Полтава":"Poltava","Вінниця":"Vinnytsia","Житомир":"Zhytomyr","Миколаїв":"Mykolaiv","Херсон":"Kherson","Тернопіль":"Ternopil","Івано-Франківськ":"Ivano-Frankivsk","Ужгород":"Uzhhorod","Луцьк":"Lutsk","Рівне":"Rivne","Суми":"Sumy","Хмельницький":"Khmelnytskyi","Черкаси":"Cherkasy","Кропивницький":"Kropyvnytskyi","Кривий Ріг":"Kryvyi Rih","Сімферополь":"Simferopol","Севастополь":"Sevastopol","Берлін":"Berlin","Париж":"Paris","Лондон":"London","Рим":"Rome","Мадрид":"Madrid","Варшава":"Warsaw","Прага":"Prague","Відень":"Vienna","Амстердам":"Amsterdam","Нью-Йорк":"New York","Лос-Анджелес":"Los Angeles","Токіо":"Tokyo","Сідней":"Sydney","Торонто":"Toronto"};
+const transliterationMap={"а":"a","б":"b","в":"v","г":"h","ґ":"g","д":"d","е":"e","є":"ye","ж":"zh","з":"z","и":"y","і":"i","ї":"yi","й":"y","к":"k","л":"l","м":"m","н":"n","о":"o","п":"p","р":"r","с":"s","т":"t","у":"u","ф":"f","х":"kh","ц":"ts","ч":"ch","ш":"sh","щ":"shch","ь":"","ю":"yu","я":"ya","'":"'"};
+const transliterate=v=>v.toLocaleLowerCase().split('').map(c=>transliterationMap[c]??c).join('');
+const normalizeSearchText=v=>v.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const getCityLabel=c=>currentLang==='en'?(cityEnglishNames[c]||transliterate(c)):c;
+const getRegionLabel=r=>currentLang==='en'?transliterate(r).replace(/s'ka oblast$/,' Oblast').replace(/ts'ka oblast$/,'tsk Oblast').replace(/zh'ka oblast$/,'zh Oblast').replace(/ oblast$/,' Oblast'):r;
+const geocodedCities={};
+async function resolveCityCoordinates(cn,isUa){if(geocodedCities[cn])return geocodedCities[cn];const q=encodeURIComponent(cn);const cc=isUa?'&countryCode=UA':'';try{const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+q+'&count=1&language=ru&format=json'+cc);const d=await r.json();const res=d.results&&d.results[0];if(!res)return null;geocodedCities[cn]={lat:res.latitude,lon:res.longitude};return geocodedCities[cn]}catch(e){return null}}
+function findCityData(cn){for(const r in citiesData){if(citiesData[r][cn])return citiesData[r][cn]}return null}
+function getWeatherIcon(code){if(code===0)return'☀️';if([1,2,3].includes(code))return'⛅';if([45,48].includes(code))return'🌫️';if([51,53,55,61,63,65,80,81,82].includes(code))return'🌧️';if([71,73,75,77,85,86].includes(code))return'❄️';if([95,96,99].includes(code))return'⛈️';return'🌡️'}
+async function fetchWeather(cn){const city=findCityData(cn);if(!city)return;weatherGoogleLink.href='https://www.google.com/search?q=погода+'+encodeURIComponent(cn);try{let coords=city;if(!Number.isFinite(city.lat)||!Number.isFinite(city.lon)){const isUa=cn==='Київ'||cn==='Севастополь'||Object.keys(citiesData).some(r=>r.indexOf('область')!==-1&&citiesData[r][cn]);coords=await resolveCityCoordinates(cn,isUa)}if(!coords){weatherTemp.textContent='--°C';weatherIcon.textContent='🌡️';return}const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+coords.lat+'&longitude='+coords.lon+'&current_weather=true');const d=await r.json();if(d.current_weather){const t=Math.round(d.current_weather.temperature);weatherTemp.textContent=(t>0?'+':'')+t+'°C';weatherIcon.textContent=getWeatherIcon(d.current_weather.weathercode)}}catch(e){weatherTemp.textContent='--°C';weatherIcon.textContent='🌡️'}}
+function selectCity(cn){selectedCityName.textContent=getCityLabel(cn);localStorage.setItem('cfg_selected_city',cn);fetchWeather(cn);customSelectWrapper.classList.remove('open')}
+function populateCityOptions(filterText){cityListScroll.innerHTML='';const filter=normalizeSearchText(filterText||'').trim();
+  const regions=Object.keys(citiesData).filter(r=>{if(activeCityFilter==='ukraine')return r.indexOf('область')!==-1||r==='Київ (столиця)'||r==='Севастополь'||r==='Автономна Республіка Крим';if(activeCityFilter==='foreign')return r.indexOf('область')===-1&&r!=='Київ (столиця)'&&r!=='Севастополь'&&r!=='Автономна Республіка Крим';return true});
+  let visible=0;
+  regions.forEach(r=>{const sr=normalizeSearchText(r+' '+getRegionLabel(r)+' '+transliterate(r));const rMatch=sr.indexOf(normalizeSearchText(filter))!==-1;
+    const cities=Object.keys(citiesData[r]).filter(c=>!filter||rMatch||normalizeSearchText(c+' '+getCityLabel(c)+' '+transliterate(c)).indexOf(normalizeSearchText(filter))!==-1);
+    if(cities.length>0){visible+=cities.length;const rt=document.createElement('div');rt.className='region-header';rt.textContent=getRegionLabel(r);cityListScroll.appendChild(rt);
+      cities.forEach(cn=>{const o=document.createElement('div');o.className='custom-option';o.textContent=getCityLabel(cn);o.onclick=e=>{e.stopPropagation();selectCity(cn)};cityListScroll.appendChild(o)})}});
+  if(visible===0){const e=document.createElement('div');e.className='city-empty-state';e.textContent=currentLang==='en'?'City not found':'Місто не знайдено';cityListScroll.appendChild(e)}}
+citySearchInput.addEventListener('input',e=>populateCityOptions(e.target.value));
+citySearchInput.addEventListener('click',e=>e.stopPropagation());
+cityFilterTabs.forEach(tab=>{tab.addEventListener('click',e=>{e.stopPropagation();activeCityFilter=tab.dataset.cityFilter;cityFilterTabs.forEach(t=>t.classList.toggle('active',t===tab));populateCityOptions(citySearchInput.value)})});
+customSelectWrapper.addEventListener('click',e=>{e.stopPropagation();customSelectWrapper.classList.toggle('open');populateCityOptions('');if(customSelectWrapper.classList.contains('open')){citySearchInput.value='';citySearchInput.focus()}});
+document.addEventListener('click',()=>customSelectWrapper.classList.remove('open'));
+const savedCity=localStorage.getItem('cfg_selected_city')||'Київ';
+selectedCityName.textContent=getCityLabel(savedCity);
+fetchWeather(savedCity);
+
+/* === BACKGROUND === */
+function detectBgSource(raw){let url=(raw||'').trim();if(!url)return null;if(!/^(https?:|data:|blob:)/i.test(url))url='https://'+url;if(/^(data:|blob:)/i.test(url))return{kind:'auto',src:url};let u;try{u=new URL(url)}catch(e){return{kind:'iframe',src:url}}
+  const host=u.hostname.replace(/^www\./i,'').toLowerCase(),path=u.pathname,params=u.searchParams;
+  if(host==='youtu.be'||/(^|\.)(youtube\.com|youtube-nocookie\.com)$/.test(host)){let id='';if(host==='youtu.be')id=path.slice(1).split('/')[0];else if(path==='/watch')id=params.get('v')||'';else{const m=path.match(/^\/(?:embed|shorts|live|v)\/([A-Za-z0-9_-]{6,})/);if(m)id=m[1]}
+    if(/^[A-Za-z0-9_-]{6,}$/.test(id)){const p=new URLSearchParams({autoplay:'1',mute:'1',controls:'0',loop:'1',playlist:id,playsinline:'1',rel:'0',modestbranding:'1',iv_load_policy:'3',disablekb:'1',fs:'0'});return{kind:'iframe',isVideoEmbed:true,src:'https://www.youtube-nocookie.com/embed/'+id+'?'+p}}}
+  if(/(^|\.)tiktok\.com$/.test(host)){const m=path.match(/\/(?:video|photo|embed(?:\/v2)?|v)\/(\d{6,})/);if(m)return{kind:'iframe',isVideoEmbed:true,src:'https://www.tiktok.com/embed/v2/'+m[1]+'?autoplay=1&loop=1&muted=1'}}
+  const ext=(path.split('.').pop()||'').toLowerCase().split('?')[0];
+  if(['mp4','webm','ogv','ogg','mov','m4v','m3u8'].includes(ext))return{kind:'video',src:url};
+  if(['jpg','jpeg','png','gif','webp','avif','bmp','svg'].includes(ext))return{kind:'image',src:url};
+  return{kind:'iframe',src:url}}
+let currentBgObjectURL=null;
+function createBgVideo(src){const v=document.createElement('video');v.src=src;v.autoplay=true;v.loop=true;v.controls=false;v.removeAttribute('controls');v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.setAttribute('controlsList','nodownload nofullscreen noremoteplayback');v.setAttribute('disablePictureInPicture','');v.setAttribute('tabindex','-1');v.playsInline=true;const vol=parseInt(settingBgVolume.value,10)||0;v.volume=vol/100;v.muted=vol===0;return v}
+function applyVolumeToAllVideos(){const vol=parseInt(settingBgVolume.value,10)||0;bgMedia.querySelectorAll('video').forEach(v=>{v.volume=vol/100;v.muted=vol===0})}
+function renderBackground(s){bgMedia.innerHTML='';if(currentBgObjectURL){try{URL.revokeObjectURL(currentBgObjectURL)}catch(e){}currentBgObjectURL=null}
+  if(s.kind==='iframe'){const f=document.createElement('iframe');f.className='bg-frame'+(s.isVideoEmbed?' bg-frame-video':'');f.src=s.src;f.setAttribute('frameborder','0');f.setAttribute('scrolling','no');f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','true');bgMedia.appendChild(f);return}
+  if(s.kind==='video'){const v=createBgVideo(s.src);bgMedia.appendChild(v);v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});return}
+  if(s.kind==='image'){const img=document.createElement('img');img.src=s.src;bgMedia.appendChild(img);return}
+  const img=document.createElement('img');img.src=s.src;img.onerror=()=>{bgMedia.innerHTML='';const v=createBgVideo(s.src);v.onerror=()=>{bgMedia.innerHTML='';const f=document.createElement('iframe');f.className='bg-frame';f.src=s.src;f.setAttribute('frameborder','0');bgMedia.appendChild(f)};bgMedia.appendChild(v);v.play().catch(()=>{})};bgMedia.appendChild(img)}
+function setBgFromUrl(url){const c=(url||'').trim();if(!c)return;const s=detectBgSource(c);if(!s)return;renderBackground(s);settingBgUrlInput.value=c;localStorage.setItem('cfg_bg_media',c);localStorage.setItem('cfg_bg_media_type','url');showToast('Фон оновлено')}
+function clearBackground(){bgMedia.innerHTML='';if(currentBgObjectURL){try{URL.revokeObjectURL(currentBgObjectURL)}catch(e){}currentBgObjectURL=null}try{localStorage.removeItem('cfg_bg_media');localStorage.removeItem('cfg_bg_media_type')}catch(e){}settingBgUrlInput.value='';showToast('Фон очищено')}
+function applyLocalFile(file){if(!file)return;const isV=file.type.startsWith('video/'),isI=file.type.startsWith('image/');if(!isV&&!isI){showToast('Тільки зображення та відео',true);return}
+  if(currentBgObjectURL){try{URL.revokeObjectURL(currentBgObjectURL)}catch(e){}currentBgObjectURL=null}
+  const url=URL.createObjectURL(file);currentBgObjectURL=url;bgMedia.innerHTML='';
+  if(isV){const v=createBgVideo(url);bgMedia.appendChild(v);v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});showToast('Відео завантажено')}
+  else{const img=document.createElement('img');img.src=url;bgMedia.appendChild(img);showToast('Зображення завантажено')}
+  if(file.size<4*1024*1024){const r=new FileReader();r.onload=ev=>{try{localStorage.setItem('cfg_bg_media',ev.target.result);localStorage.setItem('cfg_bg_media_type',file.type)}catch(e){}};r.readAsDataURL(file)}
+  else{try{localStorage.removeItem('cfg_bg_media');localStorage.removeItem('cfg_bg_media_type')}catch(e){}showToast('Файл завеликий',true)}
+  settingBgUrlInput.value=''}
+function applyGlassStyle(){const op=settingGlassOpacity.value/100,blur=settingGlassBlur.value,bg='rgba(255,255,255,'+op+')',b='blur('+blur+'px)';
+  glassWidget.style.background=bg;glassWidget.style.backdropFilter=b;glassWidget.style.webkitBackdropFilter=b;
+  document.querySelectorAll('.social-item').forEach(el=>{el.style.background=bg;el.style.backdropFilter=b;el.style.webkitBackdropFilter=b});
+  document.querySelectorAll('.social-icon').forEach(el=>{el.style.background='rgba(255,255,255,'+(op*1.2)+')';el.style.backdropFilter=b;el.style.webkitBackdropFilter=b});
+  document.querySelectorAll('.terminal-block').forEach(el=>{el.style.background=bg;el.style.backdropFilter=b;el.style.webkitBackdropFilter=b})}
+
+/* === EVENTS === */
+openSettingsBtn.addEventListener('click',()=>settingsPanel.classList.add('open'));
+closeSettingsBtn.addEventListener('click',()=>settingsPanel.classList.remove('open'));
+settingLogoColor.addEventListener('input',e=>{settingLogoColorHex.value=e.target.value.toUpperCase();applyLogoEffect();localStorage.setItem('cfg_logo_color',e.target.value)});
+settingLogoColorHex.addEventListener('input',e=>{const n=normalizeHexColor(e.target.value);if(n){if(n.length===7)settingLogoColor.value=n;logoTextEl.style.setProperty('--logo-color',n);applyLogoEffect();localStorage.setItem('cfg_logo_color',n)}});
+settingLogoEffect.addEventListener('change',()=>{applyLogoEffect();localStorage.setItem('cfg_logo_effect',settingLogoEffect.value)});
+/* НІКНЕЙМ ЗАБЛОКОВАНО — подію input видалено */
+settingBgColor.addEventListener('input',e=>{settingBgColorHex.value=e.target.value.toUpperCase();document.body.style.backgroundColor=e.target.value;localStorage.setItem('cfg_bg_color',e.target.value)});
+settingBgColorHex.addEventListener('input',e=>{const n=normalizeHexColor(e.target.value);if(n){if(n.length===7)settingBgColor.value=n;document.body.style.backgroundColor=n;localStorage.setItem('cfg_bg_color',n)}});
+settingLanguage.addEventListener('change',e=>setLanguage(e.target.value));
+settingPlanet.addEventListener('change',e=>{setPlanet(e.target.value);localStorage.setItem('cfg_planet',e.target.value)});
+settingPlanetVignette.addEventListener('change',e=>{applyPlanetVignette(e.target.value);localStorage.setItem('cfg_planet_vignette',e.target.value)});
+settingFontFamily.addEventListener('change',e=>{const f=e.target.value;if(f==='system')document.body.style.fontFamily='-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Helvetica,Arial,sans-serif';else document.body.style.fontFamily='"'+f+'", sans-serif';localStorage.setItem('cfg_font_family',f)});
+[settingWidgetScale,settingWidgetTimeSize,settingWidgetWeatherSize,settingWidgetIconSize,settingWidgetPaddingX,settingWidgetPaddingY,settingWidgetGap,settingWidgetDivider].forEach(el=>el.addEventListener('input',()=>{applyWidgetStyle();saveWidgetSettings()}));
+settingWidgetTimeShow.addEventListener('change',()=>{applyWidgetStyle();saveWidgetSettings();if(settingWidgetTimeShow._customUpdate)settingWidgetTimeShow._customUpdate()});
+settingWidgetWeatherShow.addEventListener('change',()=>{applyWidgetStyle();saveWidgetSettings();if(settingWidgetWeatherShow._customUpdate)settingWidgetWeatherShow._customUpdate()});
+applyBgUrlBtn.addEventListener('click',()=>setBgFromUrl(settingBgUrlInput.value));
+clearBgUrlBtn.addEventListener('click',clearBackground);
+settingBgUrlInput.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();setBgFromUrl(settingBgUrlInput.value)}});
+settingBgFile.addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(f)applyLocalFile(f);e.target.value=''});
+function updateBgVolumeValue(){bgVolumeValue.textContent=Math.max(0,Math.min(100,Number(settingBgVolume.value)||0))+'%'}
+settingBgVolume.addEventListener('input',e=>{updateBgVolumeValue();applyVolumeToAllVideos();localStorage.setItem('cfg_bg_volume',e.target.value)});
+settingBgBlur.addEventListener('input',e=>{bgMedia.style.filter='blur('+e.target.value+'px)';localStorage.setItem('cfg_bg_blur',e.target.value)});
+settingBgDim.addEventListener('input',e=>{bgOverlay.style.backgroundColor='rgba(0,0,0,'+(e.target.value/100)+')';localStorage.setItem('cfg_bg_dim',e.target.value)});
+settingBgGradient.addEventListener('change',e=>{const v=e.target.value;if(v==='disabled')document.body.style.backgroundImage='none';else document.body.style.backgroundImage='radial-gradient(circle at 50% 30%,rgba(30,35,50,.5) 0%,rgba(11,12,16,1) 70%)';localStorage.setItem('cfg_bg_gradient',v)});
+settingGlassOpacity.addEventListener('input',()=>{applyGlassStyle();localStorage.setItem('cfg_glass_opacity',settingGlassOpacity.value)});
+settingGlassBlur.addEventListener('input',()=>{applyGlassStyle();localStorage.setItem('cfg_glass_blur',settingGlassBlur.value)});
+settingBorderRadius.addEventListener('input',e=>{const r=e.target.value;glassWidget.style.borderRadius=(r*1.8)+'px';document.querySelectorAll('.social-item').forEach(el=>el.style.borderRadius=r+'px');document.querySelectorAll('.social-icon').forEach(el=>el.style.borderRadius=(r*.7)+'px');document.querySelectorAll('.terminal-block').forEach(el=>el.style.borderRadius=(r*1.2)+'px');localStorage.setItem('cfg_border_radius',r)});
+sizeLogo.addEventListener('input',e=>{logoTextEl.style.fontSize=e.target.value+'px';localStorage.setItem('cfg_bio_size_logo',e.target.value)});
+resetSettingsBtn.addEventListener('click',()=>{const msg=currentLang==='en'?'Reset all settings?':'Скинути всі налаштування?';if(confirm(msg)){localStorage.clear();location.reload()}});
+let dragCounter=0;
+['dragenter','dragover','dragleave','drop'].forEach(ev=>{window.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation()},false)});
+window.addEventListener('dragenter',e=>{dragCounter++;if(e.dataTransfer&&Array.from(e.dataTransfer.types).includes('Files'))document.body.classList.add('file-dragover')});
+window.addEventListener('dragleave',()=>{dragCounter--;if(dragCounter<=0){dragCounter=0;document.body.classList.remove('file-dragover')}});
+window.addEventListener('drop',e=>{dragCounter=0;document.body.classList.remove('file-dragover');if(e.dataTransfer.files&&e.dataTransfer.files.length>0)applyLocalFile(e.dataTransfer.files[0])});
+
+/* === TRANSLATIONS === */
+const translations={
+uk:{settingsTitle:"Налаштування",secGeneral:"Загальні",labelLang:"Мова інтерфейсу",optLangUk:"Українська",optLangEn:"English",labelTitle:"Нікнейм (заблоковано)",labelLogoColor:"Колір заголовка (HEX)",labelLogoEffect:"Ефект заголовка",labelFont:"Шрифт інтерфейсу",optFontSystem:"Системний",optFontMonospace:"Monospace",secTopWidget:"Верхній віджет",labelWidgetScale:"Масштаб віджета",hintWidgetScale:"50–200%.",labelWidgetTimeSize:"Розмір шрифту часу (px)",labelWidgetWeatherSize:"Розмір шрифту погоди (px)",labelWidgetIconSize:"Розмір іконки погоди (px)",labelWidgetPadding:"Внутрішні відступи X / Y",labelWidgetGap:"Відступ між елементами",labelWidgetDivider:"Висота розділювача",labelWidgetTimeShow:"Показувати час",labelWidgetWeatherShow:"Показувати погоду",optWidgetShow:"Показано",optWidgetHide:"Приховано",secPlanet:"ASCII-об'єкт у шапці",labelPlanet:"Що обертається вгорі",optPlanetMoon:"Місяць",optPlanetSaturn:"Сатурн",optPlanetEarth:"Земля",optPlanetSirius:"Сіріус",labelPlanetVignette:"Світіння планети",optPlanetVignetteEnabled:"Увімкнено",optPlanetVignetteDisabled:"Вимкнено",secBg:"Фон",labelBgUrl:"Посилання на фон",btnApply:"OK",hintBgUrl:"Enter — застосувати. ✕ — очистити.",hintDragDrop:"Підтримка drag & drop",labelBgFile:"Або файл з ПК",btnUpload:"Обрати файл",labelVolume:"Гучність відеофону",hintVolume:"0 = без звуку.",labelBlur:"Розмиття фону",labelDim:"Затемнення фону",labelVignette:"Віньєтування фону",optEnabled:"Увімкнено",optDisabled:"Вимкнено",labelBgColor:"Колір фону (HEX)",secGlass:"Стиль блоків",labelOpacity:"Прозорість блоків",labelGlassBlur:"Розмиття блоків",labelRadius:"Скруглення кутів",secLayout:"Розміри",labelSizeLogo:"Розмір заголовка",btnResetSettings:"Скинути всі налаштування",optEffectGradient:"Градієнт",optEffectNone:"Без ефекту",optEffectGlow:"Світіння",optEffectNeon:"Неон",optEffectMetallic:"Метал",optEffectFire:"Вогонь",optEffectIce:"Лід"},
+en:{settingsTitle:"Settings",secGeneral:"General",labelLang:"Language",optLangUk:"Ukrainian",optLangEn:"English",labelTitle:"Nickname (locked)",labelLogoColor:"Title Color (HEX)",labelLogoEffect:"Title Effect",labelFont:"Interface Font",optFontSystem:"System",optFontMonospace:"Monospace",secTopWidget:"Top Widget",labelWidgetScale:"Widget scale",hintWidgetScale:"50–200%.",labelWidgetTimeSize:"Time font size (px)",labelWidgetWeatherSize:"Weather font size (px)",labelWidgetIconSize:"Weather icon size (px)",labelWidgetPadding:"Inner padding X / Y",labelWidgetGap:"Gap (px)",labelWidgetDivider:"Divider height (px)",labelWidgetTimeShow:"Show time",labelWidgetWeatherShow:"Show weather",optWidgetShow:"Visible",optWidgetHide:"Hidden",secPlanet:"ASCII Object",labelPlanet:"What spins on top",optPlanetMoon:"Moon",optPlanetSaturn:"Saturn",optPlanetEarth:"Earth",optPlanetSirius:"Sirius",labelPlanetVignette:"Planet glow",optPlanetVignetteEnabled:"Enabled",optPlanetVignetteDisabled:"Disabled",secBg:"Background",labelBgUrl:"Background Link",btnApply:"OK",hintBgUrl:"Enter — apply. ✕ — clear.",hintDragDrop:"Drag & drop supported",labelBgFile:"Or file from PC",btnUpload:"Choose File",labelVolume:"Video Volume",hintVolume:"0 = muted.",labelBlur:"Background Blur",labelDim:"Background Dimming",labelVignette:"Background Vignette",optEnabled:"Enabled",optDisabled:"Disabled",labelBgColor:"Background Color (HEX)",secGlass:"Block Style",labelOpacity:"Block Opacity",labelGlassBlur:"Block Glass Blur",labelRadius:"Border Radius",secLayout:"Sizes",labelSizeLogo:"Title Size",btnResetSettings:"Reset All Settings",optEffectGradient:"Gradient",optEffectNone:"No effect",optEffectGlow:"Glow",optEffectNeon:"Neon",optEffectMetallic:"Metal",optEffectFire:"Fire",optEffectIce:"Ice"}};
+function setLanguage(lang){
+  currentLang=lang;localStorage.setItem('cfg_language',lang);
+  const t=translations[lang]||translations.uk;
+  document.getElementById('open-settings-btn').title=currentLang==='en'?'Settings':'Налаштування';
+  const map={ 't-settings-title':t.settingsTitle,'t-sec-general':t.secGeneral,'t-label-lang':t.labelLang,'t-opt-lang-uk':t.optLangUk,'t-opt-lang-en':t.optLangEn,'t-label-title':t.labelTitle,'t-label-logo-color':t.labelLogoColor,'t-label-logo-effect':t.labelLogoEffect,'t-label-font':t.labelFont,'t-opt-font-system':t.optFontSystem,'t-opt-font-monospace':t.optFontMonospace,'t-sec-topwidget':t.secTopWidget,'t-label-widget-scale':t.labelWidgetScale,'t-hint-widget-scale':t.hintWidgetScale,'t-label-widget-time-size':t.labelWidgetTimeSize,'t-label-widget-weather-size':t.labelWidgetWeatherSize,'t-label-widget-icon-size':t.labelWidgetIconSize,'t-label-widget-padding':t.labelWidgetPadding,'t-label-widget-gap':t.labelWidgetGap,'t-label-widget-divider':t.labelWidgetDivider,'t-label-widget-time-show':t.labelWidgetTimeShow,'t-label-widget-weather-show':t.labelWidgetWeatherShow,'t-opt-widget-show1':t.optWidgetShow,'t-opt-widget-hide1':t.optWidgetHide,'t-opt-widget-show2':t.optWidgetShow,'t-opt-widget-hide2':t.optWidgetHide,'t-sec-planet':t.secPlanet,'t-label-planet':t.labelPlanet,'t-opt-planet-moon':t.optPlanetMoon,'t-opt-planet-saturn':t.optPlanetSaturn,'t-opt-planet-earth':t.optPlanetEarth,'t-opt-planet-sirius':t.optPlanetSirius,'t-label-planet-vignette':t.labelPlanetVignette,'t-opt-planet-vignette-enabled':t.optPlanetVignetteEnabled,'t-opt-planet-vignette-disabled':t.optPlanetVignetteDisabled,'t-sec-bg':t.secBg,'t-label-bg-url':t.labelBgUrl,'t-hint-bg-url':t.hintBgUrl,'t-label-bg-file':t.labelBgFile,'t-hint-drag-drop':t.hintDragDrop,'t-label-volume':t.labelVolume,'t-hint-volume':t.hintVolume,'t-label-blur':t.labelBlur,'t-label-dim':t.labelDim,'t-label-vignette':t.labelVignette,'t-opt-enabled':t.optEnabled,'t-opt-disabled':t.optDisabled,'t-label-bgcolor':t.labelBgColor,'t-sec-glass':t.secGlass,'t-label-opacity':t.labelOpacity,'t-label-glassblur':t.labelGlassBlur,'t-label-radius':t.labelRadius,'t-sec-layout':t.secLayout,'t-label-sizelogo':t.labelSizeLogo,'t-opt-effect-gradient':t.optEffectGradient,'t-opt-effect-none':t.optEffectNone,'t-opt-effect-glow':t.optEffectGlow,'t-opt-effect-neon':t.optEffectNeon,'t-opt-effect-metallic':t.optEffectMetallic,'t-opt-effect-fire':t.optEffectFire,'t-opt-effect-ice':t.optEffectIce };
+  Object.keys(map).forEach(k=>{const el=document.getElementById(k);if(el)el.textContent=map[k]});
+  document.getElementById('apply-bg-url-btn').textContent=t.btnApply;
+  document.getElementById('t-btn-upload').childNodes[0].nodeValue=t.btnUpload+' ';
+  document.getElementById('reset-settings-btn').textContent=t.btnResetSettings;
+  document.querySelector('[data-city-filter="all"]').textContent=currentLang==='en'?'All cities':'Усі міста';
+  document.querySelector('[data-city-filter="ukraine"]').textContent=currentLang==='en'?'Ukraine':'Україна';
+  document.querySelector('[data-city-filter="foreign"]').textContent=currentLang==='en'?'Abroad':'Закордон';
+  document.querySelectorAll('.setting-select').forEach(s=>{if(s._customUpdate)s._customUpdate()});
+  populateCityOptions(citySearchInput.value);
+}
+
+/* === LOAD SETTINGS === */
+function loadSavedSettings(){
+  const sl=localStorage.getItem('cfg_language')||'uk';settingLanguage.value=sl;setLanguage(sl);
+  const sp=localStorage.getItem('cfg_planet')||'moon';settingPlanet.value=sp;setPlanet(sp);startPlanetLoop();
+  const spv=localStorage.getItem('cfg_planet_vignette')||'disabled';settingPlanetVignette.value=spv;applyPlanetVignette(spv);
+  /* НІКНЕЙМ ЗАВЖДИ ФІКСОВАНИЙ */
+  logoTextEl.textContent=LOCKED_NICKNAME;settingLogoText.value=LOCKED_NICKNAME;
+  const slc=localStorage.getItem('cfg_logo_color')||'#ffffff';settingLogoColor.value=slc;settingLogoColorHex.value=slc.toUpperCase();logoTextEl.style.setProperty('--logo-color',slc);
+  const sle=localStorage.getItem('cfg_logo_effect')||'gradient';settingLogoEffect.value=sle;applyLogoEffect();
+  const sf=localStorage.getItem('cfg_font_family');if(sf){settingFontFamily.value=sf;if(sf!=='system')document.body.style.fontFamily='"'+sf+'", sans-serif'}
+  const wS=localStorage.getItem('cfg_widget_scale');if(wS!==null)settingWidgetScale.value=wS;
+  const wT=localStorage.getItem('cfg_widget_time_size');if(wT!==null)settingWidgetTimeSize.value=wT;
+  const wW=localStorage.getItem('cfg_widget_weather_size');if(wW!==null)settingWidgetWeatherSize.value=wW;
+  const wI=localStorage.getItem('cfg_widget_icon_size');if(wI!==null)settingWidgetIconSize.value=wI;
+  const wPX=localStorage.getItem('cfg_widget_pad_x');if(wPX!==null)settingWidgetPaddingX.value=wPX;
+  const wPY=localStorage.getItem('cfg_widget_pad_y');if(wPY!==null)settingWidgetPaddingY.value=wPY;
+  const wG=localStorage.getItem('cfg_widget_gap');if(wG!==null)settingWidgetGap.value=wG;
+  const wD=localStorage.getItem('cfg_widget_divider');if(wD!==null)settingWidgetDivider.value=wD;
+  const wTS=localStorage.getItem('cfg_widget_time_show');if(wTS!==null)settingWidgetTimeShow.value=wTS;
+  const wWS=localStorage.getItem('cfg_widget_weather_show');if(wWS!==null)settingWidgetWeatherShow.value=wWS;
+  applyWidgetStyle();
+  const sv=localStorage.getItem('cfg_bg_volume');if(sv!==null)settingBgVolume.value=sv;updateBgVolumeValue();
+  const sb=localStorage.getItem('cfg_bg_blur');if(sb!==null){settingBgBlur.value=sb;bgMedia.style.filter='blur('+sb+'px)'}
+  const sd=localStorage.getItem('cfg_bg_dim');if(sd!==null){settingBgDim.value=sd;bgOverlay.style.backgroundColor='rgba(0,0,0,'+(sd/100)+')'}
+  const sg=localStorage.getItem('cfg_bg_gradient');if(sg){settingBgGradient.value=sg;if(sg==='disabled')document.body.style.backgroundImage='none'}
+  const scb=localStorage.getItem('cfg_bg_color')||'#0b0c10';settingBgColor.value=scb;settingBgColorHex.value=scb.toUpperCase();document.body.style.backgroundColor=scb;
+  const so=localStorage.getItem('cfg_glass_opacity');if(so!==null)settingGlassOpacity.value=so;
+  const sgb=localStorage.getItem('cfg_glass_blur');if(sgb!==null)settingGlassBlur.value=sgb;
+  applyGlassStyle();
+  const sr=localStorage.getItem('cfg_border_radius');if(sr!==null){settingBorderRadius.value=sr;glassWidget.style.borderRadius=(sr*1.8)+'px';document.querySelectorAll('.social-item').forEach(el=>el.style.borderRadius=sr+'px');document.querySelectorAll('.social-icon').forEach(el=>el.style.borderRadius=(sr*.7)+'px');document.querySelectorAll('.terminal-block').forEach(el=>el.style.borderRadius=(sr*1.2)+'px')}
+  const sbs=localStorage.getItem('cfg_bio_size_logo');if(sbs){sizeLogo.value=sbs;logoTextEl.style.fontSize=sbs+'px'}
+  const sm=localStorage.getItem('cfg_bg_media'),smt=localStorage.getItem('cfg_bg_media_type');
+  if(sm&&smt){if(smt==='url'||smt.includes('url')){settingBgUrlInput.value=sm;setBgFromUrl(sm)}else if(smt.startsWith('video/')){bgMedia.innerHTML='';const v=createBgVideo(sm);bgMedia.appendChild(v);v.play().catch(()=>{})}else{bgMedia.innerHTML='';const img=document.createElement('img');img.src=sm;bgMedia.appendChild(img)}}
+  document.querySelectorAll('.setting-select').forEach(s=>{if(s._customUpdate)s._customUpdate()});
+}
+loadSavedSettings();
+
+/* === CLOCK === */
+function updateClock(){const n=new Date();document.getElementById('time-display').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')}
+updateClock();setInterval(updateClock,1000);
+</script>
+</body>
+</html>
