@@ -2,6 +2,17 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self' 'unsafe-inline' https://geocoding-api.open-meteo.com https://api.open-meteo.com;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+               font-src 'self' https://fonts.gstatic.com;
+               img-src 'self' data: blob: https:;
+               media-src 'self' data: blob: https:;
+               frame-src https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://player.vimeo.com;
+               connect-src 'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com;
+               object-src 'none';
+               base-uri 'self';">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>He_Trogati_Mne — Bio</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230b0c10'/><circle cx='16' cy='16' r='3' fill='%23fff'/></svg>">
@@ -214,7 +225,7 @@ body.file-dragover::after{content:'Відпусти файл, щоб поста�
 <div class="setting-group"><label class="setting-label" id="t-label-bg-url">Посилання на фон</label>
 <div class="bg-action-row"><input type="text" id="setting-bg-url-input" class="setting-input" style="flex:1" placeholder="https://..."><button id="apply-bg-url-btn" class="secondary-btn">OK</button><button id="clear-bg-url-btn" class="bg-clear-btn">✕</button></div>
 <span class="setting-hint" id="t-hint-bg-url">Enter — застосувати. ✕ — очистити.</span></div>
-<div class="setting-group"><label class="setting-label" id="t-label-bg-file">Або файл з ПК</label><label class="file-upload-btn" id="t-btn-upload">Обрати файл<input type="file" id="setting-bg-file" accept="image/*,video/*" style="display:none"></label><span class="setting-hint" id="t-hint-drag-drop">Підтримка drag & drop по всій сторінці</span></div>
+<div class="setting-group"><label class="setting-label" id="t-label-bg-file">Або файл з ПК</label><label class="file-upload-btn" id="t-btn-upload">Обрати файл<input type="file" id="setting-bg-file" accept="image/png,image/jpeg,image/gif,image/webp,image/avif,image/bmp,video/mp4,video/webm,video/ogg,video/quicktime" style="display:none"></label><span class="setting-hint" id="t-hint-drag-drop">Підтримка drag & drop по всій сторінці</span></div>
 <div class="setting-group"><label class="setting-label" id="t-label-volume">Гучність відеофону</label><div class="range-value-row"><input type="range" id="setting-bg-volume" class="range-slider" min="0" max="100" value="10"><output id="bg-volume-value">10%</output></div><span class="setting-hint" id="t-hint-volume">0 = без звуку.</span></div>
 <div class="setting-group"><label class="setting-label" id="t-label-blur">Розмиття фону</label><input type="range" id="setting-bg-blur" class="range-slider" min="0" max="30" value="0"></div>
 <div class="setting-group"><label class="setting-label" id="t-label-dim">Затемнення фону</label><input type="range" id="setting-bg-dim" class="range-slider" min="0" max="90" value="40"></div>
@@ -272,8 +283,28 @@ body.file-dragover::after{content:'Відпусти файл, щоб поста�
 <div id="toast"></div>
 
 <script>
+// ============================================================
+//  БЕЗПЕКА: helpers
+// ============================================================
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+function isSafeUrl(url) {
+  if (!url) return false;
+  try {
+    const u = new URL(url);
+    return u.protocol === 'http:' || u.protocol === 'https:';
+  } catch (e) { return false; }
+}
+
 let currentLang=localStorage.getItem('cfg_language')||'uk';
 const LOCKED_NICKNAME='He_Trogati_Mne';
+let selectedCityTimezone = 'auto';
 
 /* === CUSTOM SELECT UPGRADE === */
 function upgradeSelect(selectEl){
@@ -565,7 +596,44 @@ const geocodedCities={};
 async function resolveCityCoordinates(cn,isUa){if(geocodedCities[cn])return geocodedCities[cn];const q=encodeURIComponent(cn);const cc=isUa?'&countryCode=UA':'';try{const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?name='+q+'&count=1&language=ru&format=json'+cc);const d=await r.json();const res=d.results&&d.results[0];if(!res)return null;geocodedCities[cn]={lat:res.latitude,lon:res.longitude};return geocodedCities[cn]}catch(e){return null}}
 function findCityData(cn){for(const r in citiesData){if(citiesData[r][cn])return citiesData[r][cn]}return null}
 function getWeatherIcon(code){if(code===0)return'☀️';if([1,2,3].includes(code))return'⛅';if([45,48].includes(code))return'🌫️';if([51,53,55,61,63,65,80,81,82].includes(code))return'🌧️';if([71,73,75,77,85,86].includes(code))return'❄️';if([95,96,99].includes(code))return'⛈️';return'🌡️'}
-async function fetchWeather(cn){const city=findCityData(cn);if(!city)return;weatherGoogleLink.href='https://www.google.com/search?q=погода+'+encodeURIComponent(cn);try{let coords=city;if(!Number.isFinite(city.lat)||!Number.isFinite(city.lon)){const isUa=cn==='Київ'||cn==='Севастополь'||Object.keys(citiesData).some(r=>r.indexOf('область')!==-1&&citiesData[r][cn]);coords=await resolveCityCoordinates(cn,isUa)}if(!coords){weatherTemp.textContent='--°C';weatherIcon.textContent='🌡️';return}const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+coords.lat+'&longitude='+coords.lon+'&current_weather=true');const d=await r.json();if(d.current_weather){const t=Math.round(d.current_weather.temperature);weatherTemp.textContent=(t>0?'+':'')+t+'°C';weatherIcon.textContent=getWeatherIcon(d.current_weather.weathercode)}}catch(e){weatherTemp.textContent='--°C';weatherIcon.textContent='🌡️'}}
+
+/* === WEATHER + TIMEZONE === */
+async function fetchWeather(cn){
+  const city=findCityData(cn);
+  if(!city)return;
+  weatherGoogleLink.href='https://www.google.com/search?q=погода+'+encodeURIComponent(cn);
+  try{
+    let coords=city;
+    if(!Number.isFinite(city.lat)||!Number.isFinite(city.lon)){
+      const isUa=cn==='Київ'||cn==='Севастополь'||Object.keys(citiesData).some(r=>r.indexOf('область')!==-1&&citiesData[r][cn]);
+      coords=await resolveCityCoordinates(cn,isUa);
+    }
+    if(!coords){
+      weatherTemp.textContent='--°C';
+      weatherIcon.textContent='🌡️';
+      return;
+    }
+    // &timezone=auto — API поверне часовий пояс міста (напр. "Europe/Warsaw")
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude='+coords.lat+'&longitude='+coords.lon+'&current_weather=true&timezone=auto');
+    const d=await r.json();
+    if(d.current_weather){
+      const t=Math.round(d.current_weather.temperature);
+      weatherTemp.textContent=(t>0?'+':'')+t+'°C';
+      weatherIcon.textContent=getWeatherIcon(d.current_weather.weathercode);
+    }
+    // Зберігаємо часовий пояс вибраного міста
+    if(d.timezone){
+      selectedCityTimezone = d.timezone;
+    } else {
+      selectedCityTimezone = 'auto';
+    }
+  }catch(e){
+    weatherTemp.textContent='--°C';
+    weatherIcon.textContent='🌡️';
+    selectedCityTimezone = 'auto';
+  }
+}
+
 function selectCity(cn){selectedCityName.textContent=getCityLabel(cn);localStorage.setItem('cfg_selected_city',cn);fetchWeather(cn);customSelectWrapper.classList.remove('open')}
 function populateCityOptions(filterText){cityListScroll.innerHTML='';const filter=normalizeSearchText(filterText||'').trim();
   const regions=Object.keys(citiesData).filter(r=>{if(activeCityFilter==='ukraine')return r.indexOf('область')!==-1||r==='Київ (столиця)'||r==='Севастополь'||r==='Автономна Республіка Крим';if(activeCityFilter==='foreign')return r.indexOf('область')===-1&&r!=='Київ (столиця)'&&r!=='Севастополь'&&r!=='Автономна Республіка Крим';return true});
@@ -584,12 +652,23 @@ const savedCity=localStorage.getItem('cfg_selected_city')||'Київ';
 selectedCityName.textContent=getCityLabel(savedCity);
 fetchWeather(savedCity);
 
-/* === BACKGROUND === */
-function detectBgSource(raw){let url=(raw||'').trim();if(!url)return null;if(!/^(https?:|data:|blob:)/i.test(url))url='https://'+url;if(/^(data:|blob:)/i.test(url))return{kind:'auto',src:url};let u;try{u=new URL(url)}catch(e){return{kind:'iframe',src:url}}
+/* === BACKGROUND (БЕЗПЕЧНО) === */
+function detectBgSource(raw){
+  let url=(raw||'').trim();
+  if(!url)return null;
+  // Блокуємо небезпечні схеми
+  if(/^javascript:/i.test(url))return null;
+  if(/^vbscript:/i.test(url))return null;
+  if(/^data:/i.test(url) && !/^data:image\//i.test(url) && !/^data:video\//i.test(url))return null;
+
+  if(!/^(https?:|data:|blob:)/i.test(url))url='https://'+url;
+  if(/^(data:|blob:)/i.test(url))return{kind:'auto',src:url};
+  let u;try{u=new URL(url)}catch(e){return{kind:'iframe',src:url}}
   const host=u.hostname.replace(/^www\./i,'').toLowerCase(),path=u.pathname,params=u.searchParams;
   if(host==='youtu.be'||/(^|\.)(youtube\.com|youtube-nocookie\.com)$/.test(host)){let id='';if(host==='youtu.be')id=path.slice(1).split('/')[0];else if(path==='/watch')id=params.get('v')||'';else{const m=path.match(/^\/(?:embed|shorts|live|v)\/([A-Za-z0-9_-]{6,})/);if(m)id=m[1]}
     if(/^[A-Za-z0-9_-]{6,}$/.test(id)){const p=new URLSearchParams({autoplay:'1',mute:'1',controls:'0',loop:'1',playlist:id,playsinline:'1',rel:'0',modestbranding:'1',iv_load_policy:'3',disablekb:'1',fs:'0'});return{kind:'iframe',isVideoEmbed:true,src:'https://www.youtube-nocookie.com/embed/'+id+'?'+p}}}
   if(/(^|\.)tiktok\.com$/.test(host)){const m=path.match(/\/(?:video|photo|embed(?:\/v2)?|v)\/(\d{6,})/);if(m)return{kind:'iframe',isVideoEmbed:true,src:'https://www.tiktok.com/embed/v2/'+m[1]+'?autoplay=1&loop=1&muted=1'}}
+  if(/(^|\.)vimeo\.com$/.test(host)){const m=path.match(/\/(?:video\/)?(\d{6,})/);if(m)return{kind:'iframe',isVideoEmbed:true,src:'https://player.vimeo.com/video/'+m[1]+'?autoplay=1&muted=1&loop=1&background=1&autopause=0'}}
   const ext=(path.split('.').pop()||'').toLowerCase().split('?')[0];
   if(['mp4','webm','ogv','ogg','mov','m4v','m3u8'].includes(ext))return{kind:'video',src:url};
   if(['jpg','jpeg','png','gif','webp','avif','bmp','svg'].includes(ext))return{kind:'image',src:url};
@@ -598,13 +677,18 @@ let currentBgObjectURL=null;
 function createBgVideo(src){const v=document.createElement('video');v.src=src;v.autoplay=true;v.loop=true;v.controls=false;v.removeAttribute('controls');v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');v.setAttribute('controlsList','nodownload nofullscreen noremoteplayback');v.setAttribute('disablePictureInPicture','');v.setAttribute('tabindex','-1');v.playsInline=true;const vol=parseInt(settingBgVolume.value,10)||0;v.volume=vol/100;v.muted=vol===0;return v}
 function applyVolumeToAllVideos(){const vol=parseInt(settingBgVolume.value,10)||0;bgMedia.querySelectorAll('video').forEach(v=>{v.volume=vol/100;v.muted=vol===0})}
 function renderBackground(s){bgMedia.innerHTML='';if(currentBgObjectURL){try{URL.revokeObjectURL(currentBgObjectURL)}catch(e){}currentBgObjectURL=null}
-  if(s.kind==='iframe'){const f=document.createElement('iframe');f.className='bg-frame'+(s.isVideoEmbed?' bg-frame-video':'');f.src=s.src;f.setAttribute('frameborder','0');f.setAttribute('scrolling','no');f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','true');bgMedia.appendChild(f);return}
+  if(s.kind==='iframe'){const f=document.createElement('iframe');f.className='bg-frame'+(s.isVideoEmbed?' bg-frame-video':'');f.src=s.src;f.setAttribute('frameborder','0');f.setAttribute('scrolling','no');f.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');f.setAttribute('allowfullscreen','true');f.setAttribute('referrerpolicy','no-referrer-when-downgrade');bgMedia.appendChild(f);return}
   if(s.kind==='video'){const v=createBgVideo(s.src);bgMedia.appendChild(v);v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});return}
   if(s.kind==='image'){const img=document.createElement('img');img.src=s.src;bgMedia.appendChild(img);return}
   const img=document.createElement('img');img.src=s.src;img.onerror=()=>{bgMedia.innerHTML='';const v=createBgVideo(s.src);v.onerror=()=>{bgMedia.innerHTML='';const f=document.createElement('iframe');f.className='bg-frame';f.src=s.src;f.setAttribute('frameborder','0');bgMedia.appendChild(f)};bgMedia.appendChild(v);v.play().catch(()=>{})};bgMedia.appendChild(img)}
-function setBgFromUrl(url){const c=(url||'').trim();if(!c)return;const s=detectBgSource(c);if(!s)return;renderBackground(s);settingBgUrlInput.value=c;localStorage.setItem('cfg_bg_media',c);localStorage.setItem('cfg_bg_media_type','url');showToast('Фон оновлено')}
+function setBgFromUrl(url){const c=(url||'').trim();if(!c)return;const s=detectBgSource(c);if(!s){showToast('Некоректне посилання на фон',true);return}renderBackground(s);settingBgUrlInput.value=c;localStorage.setItem('cfg_bg_media',c);localStorage.setItem('cfg_bg_media_type','url');showToast('Фон оновлено')}
 function clearBackground(){bgMedia.innerHTML='';if(currentBgObjectURL){try{URL.revokeObjectURL(currentBgObjectURL)}catch(e){}currentBgObjectURL=null}try{localStorage.removeItem('cfg_bg_media');localStorage.removeItem('cfg_bg_media_type')}catch(e){}settingBgUrlInput.value='';showToast('Фон очищено')}
-function applyLocalFile(file){if(!file)return;const isV=file.type.startsWith('video/'),isI=file.type.startsWith('image/');if(!isV&&!isI){showToast('Тільки зображення та відео',true);return}
+function applyLocalFile(file){
+  if(!file)return;
+  const allowedVideo=['video/mp4','video/webm','video/ogg','video/quicktime'];
+  const allowedImage=['image/png','image/jpeg','image/jpg','image/gif','image/webp','image/avif','image/bmp'];
+  const isV=allowedVideo.includes(file.type),isI=allowedImage.includes(file.type);
+  if(!isV&&!isI){showToast('Підтримуються лише PNG/JPEG/GIF/WebP та MP4/WebM/OGG',true);return}
   if(currentBgObjectURL){try{URL.revokeObjectURL(currentBgObjectURL)}catch(e){}currentBgObjectURL=null}
   const url=URL.createObjectURL(file);currentBgObjectURL=url;bgMedia.innerHTML='';
   if(isV){const v=createBgVideo(url);bgMedia.appendChild(v);v.play().catch(()=>{v.muted=true;v.play().catch(()=>{})});showToast('Відео завантажено')}
@@ -706,14 +790,37 @@ function loadSavedSettings(){
   const sr=localStorage.getItem('cfg_border_radius');if(sr!==null){settingBorderRadius.value=sr;glassWidget.style.borderRadius=(sr*1.8)+'px';document.querySelectorAll('.social-item').forEach(el=>el.style.borderRadius=sr+'px');document.querySelectorAll('.social-icon').forEach(el=>el.style.borderRadius=(sr*.7)+'px');document.querySelectorAll('.terminal-block').forEach(el=>el.style.borderRadius=(sr*1.2)+'px')}
   const sbs=localStorage.getItem('cfg_bio_size_logo');if(sbs){sizeLogo.value=sbs;logoTextEl.style.fontSize=sbs+'px'}
   const sm=localStorage.getItem('cfg_bg_media'),smt=localStorage.getItem('cfg_bg_media_type');
-  if(sm&&smt){if(smt==='url'||smt.includes('url')){settingBgUrlInput.value=sm;setBgFromUrl(sm)}else if(smt.startsWith('video/')){bgMedia.innerHTML='';const v=createBgVideo(sm);bgMedia.appendChild(v);v.play().catch(()=>{})}else{bgMedia.innerHTML='';const img=document.createElement('img');img.src=sm;bgMedia.appendChild(img)}}
+  if(sm&&smt){if(smt==='url'||smt.includes('url')){settingBgUrlInput.value=sm;setBgFromUrl(sm)}else if(smt.startsWith('video/')){bgMedia.innerHTML='';const v=createBgVideo(sm);bgMedia.appendChild(v);v.play().catch(()=>{})}else if(smt.startsWith('image/')){bgMedia.innerHTML='';const img=document.createElement('img');img.src=sm;bgMedia.appendChild(img)}}
   document.querySelectorAll('.setting-select').forEach(s=>{if(s._customUpdate)s._customUpdate()});
 }
 loadSavedSettings();
 
-/* === CLOCK === */
-function updateClock(){const n=new Date();document.getElementById('time-display').textContent=String(n.getHours()).padStart(2,'0')+':'+String(n.getMinutes()).padStart(2,'0')}
-updateClock();setInterval(updateClock,1000);
+/* === CLOCK WITH TIMEZONE === */
+function updateClock(){
+  const now = new Date();
+  let hours, minutes;
+  if (selectedCityTimezone && selectedCityTimezone !== 'auto') {
+    try {
+      const parts = new Intl.DateTimeFormat('uk-UA', {
+        timeZone: selectedCityTimezone,
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).formatToParts(now);
+      hours = parts.find(p => p.type === 'hour')?.value ?? '00';
+      minutes = parts.find(p => p.type === 'minute')?.value ?? '00';
+    } catch (e) {
+      hours = String(now.getHours()).padStart(2, '0');
+      minutes = String(now.getMinutes()).padStart(2, '0');
+    }
+  } else {
+    hours = String(now.getHours()).padStart(2, '0');
+    minutes = String(now.getMinutes()).padStart(2, '0');
+  }
+  document.getElementById('time-display').textContent = hours + ':' + minutes;
+}
+updateClock();
+setInterval(updateClock, 1000);
 </script>
 </body>
 </html>
