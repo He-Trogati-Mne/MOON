@@ -2,6 +2,17 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self' 'unsafe-inline' https://w.soundcloud.com https://open.spotify.com https://www.youtube.com https://www.youtube-nocookie.com https://s.ytimg.com https://geocoding-api.open-meteo.com https://api.open-meteo.com;
+                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                 font-src 'self' https://fonts.gstatic.com;
+                 img-src 'self' data: blob: https:;
+                 media-src 'self' data: blob: https:;
+                 frame-src https://w.soundcloud.com https://open.spotify.com https://www.youtube.com https://www.youtube-nocookie.com https://www.tiktok.com https://player.vimeo.com;
+                 connect-src 'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com https://open.spotify.com https://www.youtube.com;
+                 object-src 'none';
+                 base-uri 'self';">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Пошук</title>
 
@@ -885,7 +896,7 @@
       <label class="setting-label" id="t-label-bg-file">Або перетягни файл у вікно / обери з ПК</label>
       <label class="file-upload-btn" id="t-btn-upload">
         Обрати файл
-        <input type="file" id="setting-bg-file" accept="image/*,video/*" style="display: none;">
+        <input type="file" id="setting-bg-file" accept="image/png,image/jpeg,image/gif,image/webp,image/avif,image/bmp,video/mp4,video/webm,video/ogg,video/quicktime" style="display: none;">
       </label>
       <span class="setting-hint" id="t-hint-drag-drop">Підтримка drag & drop по всій сторінці</span>
     </div>
@@ -1110,6 +1121,28 @@
   <div id="toast"></div>
 
   <script>
+    // ============================================================
+    //  БЕЗПЕКА: helper для екранування та перевірки URL
+    // ============================================================
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function isSafeUrl(url) {
+      if (!url) return false;
+      try {
+        const u = new URL(url);
+        return u.protocol === 'http:' || u.protocol === 'https:';
+      } catch (e) {
+        return false;
+      }
+    }
+
     // ============================================================
     //  SELECT UPGRADE HELPER
     // ============================================================
@@ -2080,8 +2113,9 @@
       const t = translations[currentLang] || translations.uk;
       mpTitle.textContent = currentMeta.title || t.unknownTrack;
       mpAuthor.textContent = currentMeta.author || '';
-      if (currentMeta.artwork) {
-        mpArtworkImg.src = currentMeta.artwork;
+      const art = currentMeta.artwork || '';
+      if (/^https?:\/\//i.test(art)) {
+        mpArtworkImg.src = art;
         mpArtworkImg.style.display = '';
         mpArtworkPlaceholder.style.display = 'none';
       } else {
@@ -2825,18 +2859,32 @@
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
 
-        let iconHTML = '';
+        const iconDiv = document.createElement('div');
+        iconDiv.className = 'apps-item-icon';
+
         if (app.svg) {
-          iconHTML = app.svg;
+          iconDiv.innerHTML = app.svg; // безпечно: SVG задається розробником
         } else if (app.icon) {
-          iconHTML = '<img src="' + app.icon + '" alt="' + app.name + '" ' +
-                     'onerror="this.style.display=\'none\'; this.parentNode.innerHTML=' +
-                     '\'<span style=&quot;font-size:22px;color:#9aa0a6&quot;>◉</span>\';">';
+          const img = document.createElement('img');
+          img.src = app.icon;
+          img.alt = app.name;
+          img.onerror = function () {
+            this.style.display = 'none';
+            const fallback = document.createElement('span');
+            fallback.style.fontSize = '22px';
+            fallback.style.color = '#9aa0a6';
+            fallback.textContent = '◉';
+            this.parentNode.appendChild(fallback);
+          };
+          iconDiv.appendChild(img);
         }
 
-        a.innerHTML =
-          '<div class="apps-item-icon">' + iconHTML + '</div>' +
-          '<span class="apps-item-name">' + app.name + '</span>';
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'apps-item-name';
+        nameSpan.textContent = app.name;
+
+        a.appendChild(iconDiv);
+        a.appendChild(nameSpan);
         appsGrid.appendChild(a);
       });
     })();
@@ -3720,7 +3768,7 @@
     fetchWeather(savedCity);
 
     // ============================================================
-    //  SHORTCUTS
+    //  SHORTCUTS (БЕЗПЕЧНО через createElement + textContent)
     // ============================================================
     const modal = document.getElementById('shortcut-modal');
     const shortcutNameInput = document.getElementById('shortcut-name');
@@ -3738,12 +3786,14 @@
       shortcutsContainer.innerHTML = '';
       const shortcuts = getSavedShortcuts();
       const t = translations[currentLang] || translations.uk;
+
       shortcuts.forEach((item, index) => {
         const link = document.createElement('a');
         link.href = item.url;
         link.className = 'shortcut-item';
         link.draggable = true;
         link.dataset.index = index;
+
         link.addEventListener('dragstart', (e) => {
           e.stopPropagation();
           draggedShortcutIndex = index;
@@ -3777,14 +3827,36 @@
           contextMenu.style.top = e.clientY + 'px';
           contextMenu.classList.add('active');
         });
+
         let domain = item.url;
         try { domain = new URL(item.url).hostname; } catch (e) {}
-        link.innerHTML = '<div class="shortcut-icon"><img src="https://icons.duckduckgo.com/ip3/' + domain + '.ico" onerror="this.onerror=null; this.src=\'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64\';" alt="' + item.name + '"></div><span class="shortcut-title">' + item.name + '</span>';
+
+        // ── Іконка (безпечно через createElement) ──
+        const iconDiv = document.createElement('div');
+        iconDiv.className = 'shortcut-icon';
+
+        const img = document.createElement('img');
+        img.src = 'https://icons.duckduckgo.com/ip3/' + encodeURIComponent(domain) + '.ico';
+        img.alt = item.name;
+        img.onerror = function () {
+          this.onerror = null;
+          this.src = 'https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=64';
+        };
+        iconDiv.appendChild(img);
+
+        // ── Назва (безпечно через textContent) ──
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'shortcut-title';
+        titleSpan.textContent = item.name;
+
+        link.appendChild(iconDiv);
+        link.appendChild(titleSpan);
         shortcutsContainer.appendChild(link);
       });
+
       const addBtn = document.createElement('div');
       addBtn.className = 'shortcut-item add-btn';
-      addBtn.innerHTML = '<div class="shortcut-icon">+</div><span class="shortcut-title">' + t.addShortcut + '</span>';
+      addBtn.innerHTML = '<div class="shortcut-icon">+</div><span class="shortcut-title">' + escapeHtml(t.addShortcut) + '</span>';
       addBtn.onclick = () => openModal();
       shortcutsContainer.appendChild(addBtn);
       applyGlassStyle();
@@ -3818,6 +3890,10 @@
       let url = shortcutUrlInput.value.trim();
       if (!name || !url) return;
       if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
+      if (!isSafeUrl(url)) {
+        showToast('Некоректна URL-адреса', true);
+        return;
+      }
       const shortcuts = getSavedShortcuts();
       if (currentEditIndex !== null && currentEditIndex !== undefined) shortcuts[currentEditIndex] = { name, url };
       else shortcuts.push({ name, url });
@@ -3828,11 +3904,17 @@
     renderShortcuts();
 
     // ============================================================
-    //  BACKGROUND helpers
+    //  BACKGROUND helpers (БЕЗПЕЧНО)
     // ============================================================
     function detectBgSource(rawInput) {
       let url = (rawInput || '').trim();
       if (!url) return null;
+
+      // ── Блокуємо небезпечні схеми ──
+      if (/^javascript:/i.test(url)) return null;
+      if (/^vbscript:/i.test(url)) return null;
+      if (/^data:/i.test(url) && !/^data:image\//i.test(url) && !/^data:video\//i.test(url)) return null;
+
       if (!/^(https?:|data:|blob:)/i.test(url)) url = 'https://' + url;
       if (/^(data:|blob:)/i.test(url)) return { kind: 'auto', src: url };
       let u; try { u = new URL(url); } catch (e) { return { kind: 'iframe', src: url }; }
@@ -3927,7 +4009,7 @@
       const clean = (url || '').trim();
       if (!clean) return;
       const source = detectBgSource(clean);
-      if (!source) return;
+      if (!source) { showToast('Некоректне посилання на фон', true); return; }
       renderBackground(source);
       settingBgUrlInput.value = clean;
       localStorage.setItem('cfg_bg_media', clean);
@@ -3945,9 +4027,17 @@
     clearBgUrlBtn.addEventListener('click', clearBackground);
     function applyLocalFile(file) {
       if (!file) return;
-      const isVideo = file.type.startsWith('video/');
-      const isImage = file.type.startsWith('image/');
-      if (!isVideo && !isImage) { showToast('Підтримуються лише зображення та відео', true); return; }
+
+      const allowedVideo = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
+      const allowedImage = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp', 'image/avif', 'image/bmp'];
+
+      const isVideo = allowedVideo.includes(file.type);
+      const isImage = allowedImage.includes(file.type);
+
+      if (!isVideo && !isImage) {
+        showToast('Підтримуються лише PNG/JPEG/GIF/WebP та MP4/WebM/OGG', true);
+        return;
+      }
       if (currentBgObjectURL) { try { URL.revokeObjectURL(currentBgObjectURL); } catch (e) {} currentBgObjectURL = null; }
       const objectURL = URL.createObjectURL(file); currentBgObjectURL = objectURL;
       bgMedia.innerHTML = '';
@@ -4162,7 +4252,7 @@
         } else if (savedMediaType.startsWith('video/')) {
           bgMedia.innerHTML = ''; const video = createBgVideo(savedMedia);
           bgMedia.appendChild(video); video.play().catch(() => {});
-        } else {
+        } else if (savedMediaType.startsWith('image/')) {
           bgMedia.innerHTML = ''; const img = document.createElement('img');
           img.src = savedMedia; bgMedia.appendChild(img);
         }
