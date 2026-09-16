@@ -13,7 +13,7 @@
                  connect-src 'self' https://api.open-meteo.com https://geocoding-api.open-meteo.com https://open.spotify.com https://www.youtube.com;
                  object-src 'none';
                  base-uri 'self';">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Пошук</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -103,7 +103,6 @@
       color: #fff; font-size: 22px; font-weight: 600; pointer-events: none;
     }
 
-    /* ── TOP BUTTONS (bio + apps + settings) ── */
     .top-buttons {
       position: fixed; top: 20px; right: 20px;
       display: flex; gap: 10px; z-index: 1000;
@@ -133,7 +132,6 @@
     }
     .apps-btn svg { width: 20px; height: 20px; fill: #ffffff; }
 
-    /* ── GOOGLE APPS PANEL ── */
     .apps-panel {
       position: fixed; top: 74px; right: 20px;
       width: 340px; max-height: 78vh;
@@ -308,7 +306,6 @@
     .shortcut-title { font-size: 12px; color: #9aa0a6; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; pointer-events: none; }
     .add-btn .shortcut-icon { border: 1px dashed rgba(255, 255, 255, 0.2); color: #9aa0a6; font-size: 22px; }
 
-    /* PLAYER */
     #block-player { z-index: 2; width: 100%; display: flex; justify-content: center; }
     #block-player.sc-floating { position: fixed; width: auto; display: block; z-index: 900; margin: 0; }
     #block-player.sc-floating .player-container { padding: 0; margin: 0; max-width: none; }
@@ -337,7 +334,6 @@
       width: 640px !important; height: 400px !important; border: 0; display: block;
     }
 
-    /* ── ВБУДОВАНИЙ ЕМБЕД ДЛЯ FALLBACK ── */
     .embed-engine-container {
       width: 100%;
       display: flex;
@@ -534,6 +530,120 @@
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     #toast.error { border-color: rgba(255, 69, 58, 0.5); color: #ff8a80; }
+
+    /* ════════════════════════════════════════════════════════════
+       МОБІЛЬНА АДАПТАЦІЯ — тільки для телефонів (до 768px).
+       Десктоп не змінюється.
+       ════════════════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      html, body { overflow: hidden; }
+      body { padding: 0; -webkit-tap-highlight-color: transparent; }
+      input, select, textarea, button { font-family: inherit; }
+
+      #ascii-planet pre { font-size: 7px; line-height: 6.5px; }
+
+      .top-buttons { top: 10px; right: 10px; gap: 6px; }
+      .bio-btn, .settings-btn, .apps-btn { width: 44px; height: 44px; }
+      .bio-btn svg, .apps-btn svg { width: 20px; height: 20px; }
+      .settings-btn svg { width: 22px; height: 22px; }
+
+      .apps-panel { top: 62px; right: 10px; left: 10px; width: auto; max-height: 70vh; padding: 12px; }
+      .apps-grid { grid-template-columns: repeat(4, 1fr); max-height: calc(70vh - 70px); }
+      .apps-item { padding: 10px 4px; }
+      .apps-item-name { font-size: 10px; }
+
+      .main-layout { max-width: 100%; padding: 70px 12px 20px; }
+
+      .top-widget-container { padding: 6px 12px; gap: 8px; margin-bottom: 16px; border-radius: 22px; max-width: 100%; }
+      .time-display { font-size: 18px; }
+      .weather-widget { font-size: 13px; gap: 6px; }
+      #weather-icon { font-size: 15px; }
+      .custom-select-trigger { padding: 6px 8px; min-height: 38px; }
+
+      .custom-options-container {
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: calc(100vw - 20px); max-width: 400px; max-height: 80vh; padding: 12px;
+      }
+      .city-search-input { font-size: 16px; padding: 10px 12px; }
+      .city-filter-tab { padding: 10px 4px; font-size: 12px; }
+      .city-list-scroll { max-height: 55vh; }
+      .custom-option { padding: 12px; font-size: 14px; }
+
+      .logo-container { margin-bottom: 20px; padding: 0 10px; }
+      .logo-text {
+        font-size: clamp(28px, 11vw, 52px);
+        letter-spacing: clamp(2px, 1vw, 6px);
+        word-break: break-word; line-height: 1.1;
+      }
+
+      .search-container { padding: 0 4px; margin-bottom: 24px; }
+      .search-bar { padding: 8px 12px; border-radius: 22px; gap: 6px; }
+      .icon-plus { width: 40px; height: 40px; font-size: 22px; margin-right: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+      .search-input { font-size: 16px; padding: 8px 0; }
+      .icon-mic { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+
+      .shortcuts-container { gap: 12px; padding: 0 4px; }
+      .shortcut-item { width: 64px; }
+      .shortcut-icon { width: 54px; height: 54px; border-radius: 15px; }
+      .shortcut-icon img { width: 26px; height: 26px; }
+      .shortcut-title { font-size: 11px; }
+
+      .player-container { padding: 0 4px; margin-top: 18px; }
+      .mp-player { gap: 10px; padding: 12px 14px; min-height: 84px; }
+      .mp-artwork { width: 60px; height: 60px; }
+      .mp-play-btn { width: 46px; height: 46px; }
+      .mp-loop-btn { width: 34px; height: 34px; }
+      .mp-title { font-size: 13px; }
+      .mp-author { font-size: 11px; }
+
+      .settings-panel { width: 100%; max-width: 100%; right: -100%; padding: 18px 14px; gap: 14px; }
+      .close-settings { font-size: 28px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+
+      .setting-input { font-size: 16px; padding: 12px 14px; }
+      .setting-select-trigger { font-size: 16px; min-height: 46px; padding: 12px 14px; }
+      .setting-select-option { padding: 14px; font-size: 15px; min-height: 48px; }
+      .setting-select-option[data-font-preview="1"] { min-height: 56px; font-size: 18px; }
+
+      .color-row .setting-input[type="color"] { height: 46px; width: 62px; }
+      .range-slider { height: 32px; }
+      .range-value-row output { min-width: 46px; }
+
+      .file-upload-btn { padding: 14px; font-size: 14px; border-radius: 10px; }
+      .secondary-btn { padding: 12px; font-size: 14px; border-radius: 10px; }
+      .reset-btn { padding: 14px; font-size: 14px; border-radius: 10px; }
+      .bg-clear-btn { padding: 12px; font-size: 14px; border-radius: 10px; }
+
+      .context-menu { min-width: 180px; }
+      .context-menu-item { padding: 14px; font-size: 15px; }
+
+      .modal-overlay { padding: 14px; }
+      .modal-content { width: 100%; max-width: 100%; padding: 18px; border-radius: 18px; }
+      .modal-content h3 { font-size: 17px; }
+      .modal-content button { padding: 12px 16px; font-size: 15px; }
+
+      #toast { bottom: 20px; padding: 12px 18px; font-size: 13px; max-width: calc(100vw - 24px); }
+
+      ::-webkit-scrollbar { width: 0; height: 0; }
+    }
+
+    @media (max-width: 380px) {
+      .logo-text { font-size: clamp(24px, 10vw, 40px); letter-spacing: 1px; }
+      .shortcut-item { width: 60px; }
+      .shortcut-icon { width: 50px; height: 50px; }
+      .top-widget-container { padding: 5px 10px; gap: 6px; }
+      .time-display { font-size: 16px; }
+      .weather-widget { font-size: 12px; }
+      .apps-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 900px) and (orientation: landscape) {
+      .main-layout { padding-top: 55px; }
+      .logo-container { margin-bottom: 12px; }
+      .logo-text { font-size: clamp(22px, 6vw, 40px); }
+      .top-widget-container { margin-bottom: 12px; }
+      .search-container { margin-bottom: 16px; }
+      .shortcuts-container.rows-2 { max-height: 160px; }
+    }
   </style>
 </head>
 <body>
@@ -579,7 +689,6 @@
     </div>
 
     <div class="setting-section-title" id="t-sec-general">Загальні</div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-lang">Мова інтерфейсу / Language</label>
       <select id="setting-language" class="setting-select">
@@ -587,12 +696,10 @@
         <option value="en" id="t-opt-lang-en">English</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-title">Назва заголовка</label>
       <input type="text" id="setting-logo-text" class="setting-input" value="MOON">
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-logo-color">Колір заголовка (HEX)</label>
       <div class="color-row">
@@ -601,7 +708,6 @@
       </div>
       <span class="setting-hint" id="t-hint-logo-color">Не впливає на ефекти Метал, Вогонь, Лід, Веселка, Голограма</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-logo-effect">Ефект заголовка</label>
       <select id="setting-logo-effect" class="setting-select">
@@ -627,7 +733,6 @@
         <option value="gradient-anim" id="t-opt-effect-gradanim">Анімований градієнт</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-font">Шрифт інтерфейсу</label>
       <select id="setting-font-family" class="setting-select">
@@ -662,7 +767,6 @@
       </select>
       <span class="setting-hint" id="t-hint-fonts">Усі шрифти з Google Fonts — завантажуються стабільно</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-engine">Пошукова система</label>
       <select id="setting-engine" class="setting-select">
@@ -675,7 +779,6 @@
     </div>
 
     <div class="setting-section-title" id="t-sec-topwidget">Верхній віджет (час / погода)</div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-scale">Масштаб віджета</label>
       <div class="range-value-row">
@@ -684,7 +787,6 @@
       </div>
       <span class="setting-hint" id="t-hint-widget-scale">50–200%. Впливає на весь віджет одразу.</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-time-size">Розмір шрифту часу (px)</label>
       <div class="range-value-row">
@@ -692,7 +794,6 @@
         <output id="widget-time-size-value" for="setting-widget-time-size">20</output>
       </div>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-weather-size">Розмір шрифту погоди (px)</label>
       <div class="range-value-row">
@@ -700,7 +801,6 @@
         <output id="widget-weather-size-value" for="setting-widget-weather-size">15</output>
       </div>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-icon-size">Розмір іконки погоди (px)</label>
       <div class="range-value-row">
@@ -708,7 +808,6 @@
         <output id="widget-icon-size-value" for="setting-widget-icon-size">16</output>
       </div>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-padding">Внутрішні відступи X / Y (px)</label>
       <div class="size-controls">
@@ -717,7 +816,6 @@
       </div>
       <span class="setting-hint" id="widget-padding-hint">X: 16 · Y: 6</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-gap">Відступ між елементами (px)</label>
       <div class="range-value-row">
@@ -725,7 +823,6 @@
         <output id="widget-gap-value" for="setting-widget-gap">12</output>
       </div>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-divider">Висота розділювача (px)</label>
       <div class="range-value-row">
@@ -733,7 +830,6 @@
         <output id="widget-divider-value" for="setting-widget-divider">16</output>
       </div>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-time-show">Показувати час</label>
       <select id="setting-widget-time-show" class="setting-select">
@@ -741,7 +837,6 @@
         <option value="disabled" id="t-opt-widget-hide1">Приховано</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-widget-weather-show">Показувати погоду</label>
       <select id="setting-widget-weather-show" class="setting-select">
@@ -751,7 +846,6 @@
     </div>
 
     <div class="setting-section-title" id="t-sec-planet">ASCII-об'єкт у шапці</div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-planet">Що обертається вгорі</label>
       <select id="setting-planet" class="setting-select">
@@ -760,7 +854,6 @@
         <option value="earth" id="t-opt-planet-earth">Земля</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-planet-vignette">Градієнтне віньєтування (світіння планети)</label>
       <select id="setting-planet-vignette" class="setting-select">
@@ -771,7 +864,6 @@
     </div>
 
     <div class="setting-section-title" id="t-sec-player">Плеєр (музика)</div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-service">Сервіс</label>
       <select id="setting-player-service" class="setting-select">
@@ -782,13 +874,11 @@
       </select>
       <span class="setting-hint" id="t-hint-player-service">Один плеєр. Обери сервіс — плеєр працюватиме лише з ним.</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-url">Посилання</label>
       <input type="text" id="setting-player-url" class="setting-input" placeholder="https://...">
       <span class="setting-hint" id="player-url-hint">Встав посилання на трек</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-show">Показувати плеєр</label>
       <select id="setting-player-show" class="setting-select">
@@ -796,7 +886,6 @@
         <option value="disabled" id="t-opt-player-show-off">Вимкнено</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-volume">Гучність музики</label>
       <div class="range-value-row">
@@ -805,7 +894,6 @@
       </div>
       <span class="setting-hint" id="t-hint-player-volume">0 = без звуку.</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-theme">Тема плеєра (фон)</label>
       <select id="setting-player-theme" class="setting-select">
@@ -814,7 +902,6 @@
         <option value="transparent" id="t-opt-player-theme-transparent">Прозора (скло)</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-loop">Повторювати один трек (цикл)</label>
       <select id="setting-player-loop" class="setting-select">
@@ -822,7 +909,6 @@
         <option value="disabled" id="t-opt-player-loop-off">Вимкнено (грає один раз)</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-color">Акцентний колір плеєра</label>
       <div class="color-row">
@@ -830,7 +916,6 @@
         <input type="text" id="setting-player-color-hex" class="setting-input hex-input" value="#FFFFFF" maxlength="7" placeholder="#FFFFFF" autocomplete="off" spellcheck="false">
       </div>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-position">Розташування плеєра</label>
       <select id="setting-player-position" class="setting-select">
@@ -847,7 +932,6 @@
         <option value="custom" id="t-opt-ppos-custom">Власна позиція (X / Y)</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-offset">Зсув X / Y (px)</label>
       <div class="size-controls">
@@ -856,7 +940,6 @@
       </div>
       <span class="setting-hint" id="player-offset-hint">X: 0 · Y: 0</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-size">Розмір плеєра</label>
       <select id="setting-player-size" class="setting-select">
@@ -870,7 +953,6 @@
         <option value="custom" id="t-opt-psize-custom">Власний розмір</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-player-customsize">Ширина / Висота (px)</label>
       <div class="size-controls">
@@ -881,7 +963,6 @@
     </div>
 
     <div class="setting-section-title" id="t-sec-bg">Фон та Візуальні ефекти</div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-bg-url">Посилання на фон (картинка, MP4, YouTube, TikTok, будь-який сайт)</label>
       <div class="bg-action-row">
@@ -891,7 +972,6 @@
       </div>
       <span class="setting-hint" id="t-hint-bg-url">Enter — застосувати. ✕ — очистити фон.</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-bg-file">Або перетягни файл у вікно / обери з ПК</label>
       <label class="file-upload-btn" id="t-btn-upload">
@@ -900,7 +980,6 @@
       </label>
       <span class="setting-hint" id="t-hint-drag-drop">Підтримка drag & drop по всій сторінці</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-volume">Гучність відеофону</label>
       <div class="range-value-row">
@@ -909,17 +988,14 @@
       </div>
       <span class="setting-hint" id="t-hint-volume">0 = без звуку. YouTube/TikTok завжди без звуку.</span>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-blur">Розмиття фону (Blur)</label>
       <input type="range" id="setting-bg-blur" class="range-slider" min="0" max="30" value="0">
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-dim">Затемнення фону</label>
       <input type="range" id="setting-bg-dim" class="range-slider" min="0" max="90" value="40">
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-vignette">Градієнтне віньєтування фону</label>
       <select id="setting-bg-gradient" class="setting-select">
@@ -927,7 +1003,6 @@
         <option value="disabled" id="t-opt-disabled">Вимкнено (Чистий фон)</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-bgcolor">Колір фону (HEX)</label>
       <div class="color-row">
@@ -941,12 +1016,10 @@
       <label class="setting-label" id="t-label-opacity">Прозорість блоків</label>
       <input type="range" id="setting-glass-opacity" class="range-slider" min="0" max="50" value="5">
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-glassblur">Розмиття блоків</label>
       <input type="range" id="setting-glass-blur" class="range-slider" min="0" max="30" value="12">
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-radius">Скруглення кутів</label>
       <input type="range" id="setting-border-radius" class="range-slider" min="0" max="30" value="16">
@@ -961,7 +1034,6 @@
         <option value="rows-unlimited" id="t-opt-rowunlim">Безлімітно</option>
       </select>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-align">Вирівнювання закладок</label>
       <select id="setting-shortcut-align" class="setting-select">
@@ -984,12 +1056,10 @@
         </div>
       </div>
     </div>
-
     <div class="setting-group">
       <label class="setting-label" id="t-label-dragmode">Режим перетягування блоків</label>
       <button id="toggle-drag-mode" class="setting-input" style="cursor:pointer;">Увімкнути перетягування блоків</button>
     </div>
-
     <div class="setting-group">
       <button id="reset-layout-btn" class="secondary-btn">Скинути порядок блоків</button>
       <button id="reset-settings-btn" class="reset-btn">Скинути всі налаштування</button>
@@ -1394,8 +1464,6 @@
     let isDragMode = false; let draggedBlock = null;
     let currentLang = localStorage.getItem('cfg_language') || 'uk';
     let currentBgObjectURL = null;
-
-    // Часовий пояс вибраного міста
     let selectedCityTimezone = 'auto';
 
     const translations = {
@@ -2863,7 +2931,7 @@
         iconDiv.className = 'apps-item-icon';
 
         if (app.svg) {
-          iconDiv.innerHTML = app.svg; // безпечно: SVG задається розробником
+          iconDiv.innerHTML = app.svg;
         } else if (app.icon) {
           const img = document.createElement('img');
           img.src = app.icon;
@@ -3651,7 +3719,6 @@
       return '🌡️';
     }
 
-    // Оновлення погоди + часового поясу
     async function fetchWeather(cityName) {
       const city = findCityData(cityName);
       if (!city) return;
@@ -3679,7 +3746,6 @@
           weatherIcon.textContent = getWeatherIcon(data.current_weather.weathercode);
         }
 
-        // Часовий пояс вибраного міста
         if (data.timezone) {
           selectedCityTimezone = data.timezone;
         } else {
@@ -3777,10 +3843,13 @@
     let currentEditIndex = null; let selectedShortcutIndex = null; let draggedShortcutIndex = null;
 
     function getSavedShortcuts() {
-      const saved = localStorage.getItem('custom_shortcuts_v2');
-      return saved ? JSON.parse(saved) : [];
+      try {
+        const saved = localStorage.getItem('custom_shortcuts_v2');
+        const parsed = saved ? JSON.parse(saved) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) { return []; }
     }
-    function saveShortcutsArray(shortcuts) { localStorage.setItem('custom_shortcuts_v2', JSON.stringify(shortcuts)); }
+    function saveShortcutsArray(shortcuts) { try { localStorage.setItem('custom_shortcuts_v2', JSON.stringify(shortcuts)); } catch (e) {} }
 
     function renderShortcuts() {
       shortcutsContainer.innerHTML = '';
@@ -3831,7 +3900,6 @@
         let domain = item.url;
         try { domain = new URL(item.url).hostname; } catch (e) {}
 
-        // ── Іконка (безпечно через createElement) ──
         const iconDiv = document.createElement('div');
         iconDiv.className = 'shortcut-icon';
 
@@ -3844,7 +3912,6 @@
         };
         iconDiv.appendChild(img);
 
-        // ── Назва (безпечно через textContent) ──
         const titleSpan = document.createElement('span');
         titleSpan.className = 'shortcut-title';
         titleSpan.textContent = item.name;
@@ -3910,7 +3977,6 @@
       let url = (rawInput || '').trim();
       if (!url) return null;
 
-      // ── Блокуємо небезпечні схеми ──
       if (/^javascript:/i.test(url)) return null;
       if (/^vbscript:/i.test(url)) return null;
       if (/^data:/i.test(url) && !/^data:image\//i.test(url) && !/^data:video\//i.test(url)) return null;
