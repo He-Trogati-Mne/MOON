@@ -1,7 +1,6 @@
 <div align="center">
 
   <h1>He_Trogati_Mne</h1>
-  <p><b>«digital footprint // leave no trace» // nothing else matters</b></p>
 
   <p>
     <a href="https://twitter.com/He_Trogati_Mne"><img src="https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X" /></a>
